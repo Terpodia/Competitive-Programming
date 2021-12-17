@@ -15,20 +15,22 @@ stack<int> S;
 
 void Tarjan(int u) {
   S.push(u);
-  dfs_num[u] = dfs_low[u] = cntSCC++;
+  dfs_num[u] = dfs_low[u] = dfsNumberCounter++;
+  vis[u] = true;
 
   for (int v : G[u]) {
     if (dfs_num[v] == UNVISITED) 
       Tarjan(v);
-    if (!vis[v])
+    if (vis[v])
       dfs_low[u] = min(dfs_low[u], dfs_low[v]);
   }
 
   if (dfs_low[u] == dfs_num[u]) {
+    cntSCC++;
     printf("SCC: [ ");
     while (!S.empty()) {
       int v = S.top(); S.pop();
-      vis[v] = true;
+      vis[v] = false;
       printf("%d ", v);
       if (u == v) break;
     }
