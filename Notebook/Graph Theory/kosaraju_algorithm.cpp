@@ -12,10 +12,11 @@ bool vis[MAXN];
 stack<int> S;
 
 void Kosaraju(int u, int pass=1) {
+  vis[u] = true;
   for (int v : G[pass][u]) if (!vis[v]) {
     Kosaraju(v, pass);
   }
-  S.push(u); 
+  if (pass == 1) S.push(u); 
 }
 
 int main() {
