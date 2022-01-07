@@ -64,7 +64,7 @@ u64 rho(u64 n){
   if((n & 1) == 0) return 2;
 	static u64 s[10000011];
 	while(1){
-	u64 x=rand()%n,y=x,c=rand()%n,v=0,p=1,*px=s,*py=s;
+	  u64 x=rand()%n,y=x,c=rand()%n,v=0,p=1,*px=s,*py=s;
 		while(1){
 			*py++=y=(mult(y,y,n)+c)%n;
 			*py++=y=(mult(y,y,n)+c)%n;
