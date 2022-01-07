@@ -7,7 +7,7 @@ typedef unsigned long long u64;
 typedef __uint128_t u128;
 typedef unordered_map<u64, u64> ump;
  
-u64 mult(u64 a, u64 b, u64 mod){return ((u128)a * b) % mod;}
+u64 mult(u64 a, u64 b, u64 mod){ return ((u128)a * b) % mod; }
  
 u64 binpow(u64 a, u64 e, u64 mod){
   u64 ret=1;
@@ -64,8 +64,7 @@ u64 rho(u64 n){
   if((n & 1) == 0) return 2;
 	static u64 s[10000011];
 	while(1){
-	u64 x=rand()%n,y=x,c=rand()%n;
-		u64 *px=s,*py=s,v=0,p=1;
+	u64 x=rand()%n,y=x,c=rand()%n,v=0,p=1,*px=s,*py=s;
 		while(1){
 			*py++=y=(mult(y,y,n)+c)%n;
 			*py++=y=(mult(y,y,n)+c)%n;
@@ -79,7 +78,7 @@ u64 rho(u64 n){
 				v=0;
 			}
 		}
-		if((p=__gcd(p,n))>1&&p<n)return p;
+		if(v && (p=__gcd(p,n))>1&&p<n)return p;
 	}
 }
  
