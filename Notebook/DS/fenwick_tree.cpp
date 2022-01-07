@@ -6,7 +6,7 @@ typedef vector<ll> v64;
 
 #define LSOne(x) (x) & (-x)
 
-onst int MAXLOG = 24;
+const int MAXLOG = 24;
 
 class FenwickTree {
   private:
