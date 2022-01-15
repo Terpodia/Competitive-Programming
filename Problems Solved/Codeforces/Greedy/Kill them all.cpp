@@ -35,6 +35,7 @@ void set_IO(string name = "") {
   cout << fixed << setprecision(15);
 }
 
+typedef long long ll;
 typedef __uint128_t u128;
 #define sz(x) (int)x.size()
 #define FOR(i, x, n) for (int i = (x); i < (int)(n); i++)
@@ -42,7 +43,30 @@ typedef __uint128_t u128;
 
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 
-int main() { 
-  return 0; 
+int main() {
+  int tc;
+  scan(tc);
+  while (tc--) {
+    int n;
+    ll r;
+    scan(n, r);
+    ll x[n];
+    FOR(i, 0, n) scan(x[i]);
+    sort(x, x + n, greater<ll>());
+    ll acc = 0;
+    int ans = 0, i = 0;
+    while (i < n) {
+      if (x[i] - acc <= 0) {
+        i++;
+        continue;
+      }
+      ans++;
+      acc += r;
+      while (i + 1 < n && x[i + 1] == x[i]) i++;
+      i++;
+    }
+    printf("%d\n", ans);
+  }
+  return 0;
 }
 // "Si puedes imaginarlo puedes programarlo" Alejandro Taboada

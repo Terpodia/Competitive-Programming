@@ -36,6 +36,7 @@ void set_IO(string name = "") {
 }
 
 typedef __uint128_t u128;
+typedef long long ll;
 #define sz(x) (int)x.size()
 #define FOR(i, x, n) for (int i = (x); i < (int)(n); i++)
 #define ROF(i, x, n) for (int i = (x); i > (int)(n); i--)
@@ -43,6 +44,13 @@ typedef __uint128_t u128;
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 
 int main() { 
-  return 0; 
+  int tc;
+  scan(tc);
+  while (tc--) {
+    ll x, y;
+    scan(x, y);
+    (x - y == 1) ? puts("NO") : puts("YES");
+  }
+  return 0;
 }
 // "Si puedes imaginarlo puedes programarlo" Alejandro Taboada
