@@ -40,6 +40,9 @@ void _dbg(istream_iterator<string> it, T &head, U &... tail) {
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 
 #define sz(x) (int)x.size()
+#define all(x) x.begin(), x.end()
+#define f first
+#define s second
 #define rep(i, x, n) \
   for (__typeof(n) i = (x); i != (n); i += 1 - 2 * ((x) > (n)))
 #define line cout << "\n-----------------------------\n";
@@ -55,7 +58,7 @@ mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 typedef __uint128_t u128;
 
 int main() {
-  // 🤡
+
   return 0;
 }
 // "Si puedes imaginarlo puedes programarlo" Alejandro Taboada
