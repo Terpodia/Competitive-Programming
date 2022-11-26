@@ -21,7 +21,7 @@ void _scan(vector<T> &v) {
 }
 void scan() {}
 template <typename T, typename... U>
-void scan(T &head, U &... tail) {
+void scan(T &head, U &...tail) {
   _scan(head);
   scan(tail...);
 }
@@ -32,7 +32,7 @@ void set_IO() {
 
 void _dbg(istream_iterator<string> it) {}
 template <typename T, typename... U>
-void _dbg(istream_iterator<string> it, T &head, U &... tail) {
+void _dbg(istream_iterator<string> it, T &head, U &...tail) {
   cout << *it << "=" << head << " ";
   _dbg(++it, tail...);
 }
@@ -63,89 +63,87 @@ const int MAXM = 2e5;
 int n, m, r[MAXM][3], dir[MAXM], vis[MAXM];
 vector<int> g[MAXM], dag[MAXM];
 
-map<pair<int,int>,int> mp;
+map<pair<int, int>, int> mp;
 
-void is_bipartite(int u, int d, bool& can){
+void is_bipartite(int u, int d, bool &can) {
   dir[u] = d;
-  for(int v : g[u]){
-    if(dir[u] == dir[v]) can=false;
-    if(dir[v] == -1) is_bipartite(v, 1 - d, can);
+  for (int v : g[u]) {
+    if (dir[u] == dir[v]) can = false;
+    if (dir[v] == -1) is_bipartite(v, 1 - d, can);
   }
 }
-void construct_dag(int u){
+void construct_dag(int u) {
   vis[u] = 1;
-  for(int v : g[u]) if(!vis[v]){
-    int type = mp[{min(u,v), max(u,v)}];
-    if(type == 1){
-      (dir[u] == 0) ? dag[u].pb(v) : dag[v].pb(u);
+  for (int v : g[u])
+    if (!vis[v]) {
+      int type = mp[{min(u, v), max(u, v)}];
+      if (type == 1) {
+        (dir[u] == 0) ? dag[u].pb(v) : dag[v].pb(u);
+      } else {
+        (dir[u] == 0) ? dag[v].pb(u) : dag[u].pb(v);
+      }
     }
-    else{
-      (dir[u] == 0) ? dag[v].pb(u) : dag[u].pb(v);
-    }
-  }
 }
-void is_dag(int u, bool& can){
+void is_dag(int u, bool &can) {
   vis[u] = 1;
-  for (int v : dag[u]){
-    if(vis[v] == 1) can = false;
-    if(!vis[v]) is_dag(v, can);
+  for (int v : dag[u]) {
+    if (vis[v] == 1) can = false;
+    if (!vis[v]) is_dag(v, can);
   }
   vis[u] = 2;
 }
 
-void toposort(int u, vector<int>& t){
+void toposort(int u, vector<int> &t) {
   vis[u] = 1;
-  for(int v : dag[u]) if(!vis[v]) 
-    toposort(v, t);
+  for (int v : dag[u])
+    if (!vis[v]) toposort(v, t);
   t.pb(u);
 }
 
 int main() {
   scan(n, m);
   bool can = true;
-  
-  rep(k, 0, m){
+
+  rep(k, 0, m) {
     int type, i, j;
     scan(type, i, j);
-    r[k][0] = type, r[k][1] = i-1, r[k][2] = j-1;
-    mp[{min(i-1,j-1), max(i-1,j-1)}] = type;
+    r[k][0] = type, r[k][1] = i - 1, r[k][2] = j - 1;
+    mp[{min(i - 1, j - 1), max(i - 1, j - 1)}] = type;
   }
-  rep(i, 0, m){
+  rep(i, 0, m) {
     int u = r[i][1], v = r[i][2];
     g[u].pb(v);
     g[v].pb(u);
   }
   memset(dir, -1, sizeof(dir));
-  rep(i, 0, n){
-    if(dir[i] == -1){
+  rep(i, 0, n) {
+    if (dir[i] == -1) {
       is_bipartite(i, 0, can);
     }
   }
-  if(!can){
+  if (!can) {
     puts("NO");
     return 0;
   }
-  rep(i, 0, n) if(!vis[i]) construct_dag(i);
+  rep(i, 0, n) if (!vis[i]) construct_dag(i);
   memset(vis, 0, sizeof(vis));
-  rep(i, 0, n) if(!vis[i]) is_dag(i, can);
+  rep(i, 0, n) if (!vis[i]) is_dag(i, can);
 
-  if(!can){
+  if (!can) {
     puts("NO");
     return 0;
   }
 
   vector<int> t;
   memset(vis, 0, sizeof(vis));
-  rep(i, 0, n) if(!vis[i]) toposort(i, t);
+  rep(i, 0, n) if (!vis[i]) toposort(i, t);
   reverse(all(t));
 
   int pos[n];
   rep(i, 0, n) pos[t[i]] = i;
-  
+
   puts("YES");
-  rep(i, 0, n){
-    printf("%c %d\n", (dir[i]==0)?'L':'R', pos[i]);
-  }
+  rep(i, 0, n) { printf("%c %d\n", (dir[i] == 0) ? 'L' : 'R', pos[i]); }
 
   return 0;
 }

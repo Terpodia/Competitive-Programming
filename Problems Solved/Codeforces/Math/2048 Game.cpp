@@ -22,7 +22,7 @@ void _scan(vector<T> &v) {
 }
 void scan() {}
 template <typename T, typename... U>
-void scan(T &head, U &... tail) {
+void scan(T &head, U &...tail) {
   _scan(head);
   scan(tail...);
 }

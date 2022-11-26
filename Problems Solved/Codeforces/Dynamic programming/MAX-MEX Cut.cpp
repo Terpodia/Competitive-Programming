@@ -1,6 +1,6 @@
-#include <iostream>
 #include <algorithm>
 #include <cstring>
+#include <iostream>
 using namespace std;
 
 const int MAXN = 1e5;
@@ -27,11 +27,12 @@ int solve(int i, int f0, int f1) {
   (s[0][i] == '1') ? f1 = 1 : f0 = 1;
   (s[1][i] == '1') ? f1 = 1 : f0 = 1;
 
-  return ret = max(solve(i+1, f0, f1), MEX(f0, f1) + solve(i+1, 0, 0));
+  return ret = max(solve(i + 1, f0, f1), MEX(f0, f1) + solve(i + 1, 0, 0));
 }
 
 int main() {
-  int t; cin >> t;
+  int t;
+  cin >> t;
 
   while (t--) {
     cin >> n;
@@ -43,4 +44,3 @@ int main() {
 
   return 0;
 }
-

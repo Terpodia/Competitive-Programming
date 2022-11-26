@@ -21,7 +21,7 @@ void _scan(vector<T> &v) {
 }
 void scan() {}
 template <typename T, typename... U>
-void scan(T &head, U &... tail) {
+void scan(T &head, U &...tail) {
   _scan(head);
   scan(tail...);
 }
@@ -32,7 +32,7 @@ void set_IO() {
 
 void _dbg(istream_iterator<string> it) {}
 template <typename T, typename... U>
-void _dbg(istream_iterator<string> it, T &head, U &... tail) {
+void _dbg(istream_iterator<string> it, T &head, U &...tail) {
   cout << *it << "=" << head << " ";
   _dbg(++it, tail...);
 }
@@ -61,25 +61,22 @@ typedef __uint128_t u128;
 int main() {
   int tt;
   scan(tt);
-  while(tt--){
+  while (tt--) {
     int n;
     scan(n);
-    if(n == 3){
+    if (n == 3) {
       printf("-1\n");
-    }
-    else if(n == 5){
+    } else if (n == 5) {
       printf("5 4 1 2 3\n");
-    }
-    else{
+    } else {
       int ans[n];
-      rep(i,0,n) ans[i] = i+1;
-      sort(ans,ans+n, greater<int>());
-      if(n % 2 == 0){
-        rep(i,0,n) printf("%d%c",ans[i], " \n"[i==n-1]);
-      }
-      else{
-        swap(ans[n/2], ans[n/2 - 1]);
-        rep(i,0,n) printf("%d%c",ans[i], " \n"[i==n-1]);
+      rep(i, 0, n) ans[i] = i + 1;
+      sort(ans, ans + n, greater<int>());
+      if (n % 2 == 0) {
+        rep(i, 0, n) printf("%d%c", ans[i], " \n"[i == n - 1]);
+      } else {
+        swap(ans[n / 2], ans[n / 2 - 1]);
+        rep(i, 0, n) printf("%d%c", ans[i], " \n"[i == n - 1]);
       }
     }
   }

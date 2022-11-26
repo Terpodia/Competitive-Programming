@@ -21,7 +21,7 @@ void _scan(vector<T> &v) {
 }
 void scan() {}
 template <typename T, typename... U>
-void scan(T &head, U &... tail) {
+void scan(T &head, U &...tail) {
   _scan(head);
   scan(tail...);
 }
@@ -32,7 +32,7 @@ void set_IO() {
 
 void _dbg(istream_iterator<string> it) {}
 template <typename T, typename... U>
-void _dbg(istream_iterator<string> it, T &head, U &... tail) {
+void _dbg(istream_iterator<string> it, T &head, U &...tail) {
   cout << *it << "=" << head << " ";
   _dbg(++it, tail...);
 }
@@ -58,34 +58,42 @@ mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 
 typedef __uint128_t u128;
 
-int main(){
+int main() {
   int tt;
   scan(tt);
-  while(tt--){
-    int n,x,y;
-    scan(n,x,y);
-    if(x<y) swap(x,y);
+  while (tt--) {
+    int n, x, y;
+    scan(n, x, y);
+    if (x < y) swap(x, y);
 
-    if(x==0 && y==0) puts("-1");
-    else if(y != 0) puts("-1"); 
-    else{
-      bool can=true;
+    if (x == 0 && y == 0)
+      puts("-1");
+    else if (y != 0)
+      puts("-1");
+    else {
+      bool can = true;
       vector<int> ans;
 
-      int cnt=0, curr=1;
-      rep(i,0,n-1){
-        if(cnt < x){ans.pb(curr); cnt++;}
-        else{cnt=1; curr=i+2; ans.pb(curr);}
+      int cnt = 0, curr = 1;
+      rep(i, 0, n - 1) {
+        if (cnt < x) {
+          ans.pb(curr);
+          cnt++;
+        } else {
+          cnt = 1;
+          curr = i + 2;
+          ans.pb(curr);
+        }
       }
-      if(cnt != x) can=false;
+      if (cnt != x) can = false;
 
-      if(!can) puts("-1");
-      else{
-        rep(i,0,sz(ans)) 
-          printf("%d%c",ans[i]," \n"[i==sz(ans)-1]);
+      if (!can)
+        puts("-1");
+      else {
+        rep(i, 0, sz(ans)) printf("%d%c", ans[i], " \n"[i == sz(ans) - 1]);
       }
     }
   }
   return 0;
 }
-// "Si puedes imaginarlo puedes programarlo" Alejandro Taboada 
+// "Si puedes imaginarlo puedes programarlo" Alejandro Taboada

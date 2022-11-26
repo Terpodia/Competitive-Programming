@@ -21,7 +21,7 @@ void _scan(vector<T> &v) {
 }
 void scan() {}
 template <typename T, typename... U>
-void scan(T &head, U &... tail) {
+void scan(T &head, U &...tail) {
   _scan(head);
   scan(tail...);
 }
@@ -32,7 +32,7 @@ void set_IO() {
 
 void _dbg(istream_iterator<string> it) {}
 template <typename T, typename... U>
-void _dbg(istream_iterator<string> it, T &head, U &... tail) {
+void _dbg(istream_iterator<string> it, T &head, U &...tail) {
   cout << *it << "=" << head << " ";
   _dbg(++it, tail...);
 }
@@ -62,17 +62,17 @@ int main() {
   int n, k;
   scan(n, k);
   int a[k];
-  rep(i,0,k) scan(a[i]);
+  rep(i, 0, k) scan(a[i]);
 
-  int dp[n+1][2];
+  int dp[n + 1][2];
   memset(dp, 0, sizeof(dp));
   dp[0][0] = dp[0][1] = 0;
 
-  rep(i, 1, n+1) rep(j, 0, k) if(a[j] <= i){
-    if(j == 0) dp[i][1] = (int)1e9;
-        
-    dp[i][0] = max(dp[i][0], dp[i-a[j]][1] + a[j]);
-    dp[i][1] = min(dp[i][1], dp[i-a[j]][0]);
+  rep(i, 1, n + 1) rep(j, 0, k) if (a[j] <= i) {
+    if (j == 0) dp[i][1] = (int)1e9;
+
+    dp[i][0] = max(dp[i][0], dp[i - a[j]][1] + a[j]);
+    dp[i][1] = min(dp[i][1], dp[i - a[j]][0]);
   }
 
   printf("%d\n", dp[n][0]);

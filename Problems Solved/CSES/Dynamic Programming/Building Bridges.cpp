@@ -89,4 +89,3 @@ int main() {
   printf("%lld\n", dp[n - 1] + sum);
   return 0;
 }
-

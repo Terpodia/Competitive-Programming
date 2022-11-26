@@ -1,47 +1,52 @@
 #include <algorithm>
-#include <iostream>
 #include <cstring>
+#include <iostream>
+#include <map>
+#include <queue>
+#include <set>
+#include <stack>
 #include <string>
 #include <vector>
-#include <stack>
-#include <queue>
-#include <map>
-#include <set>
 using namespace std;
 /* ================================================= */
 void fastIO() { cin.tie(0)->sync_with_stdio(0); }
 
 int aux;
-void _scan(int &x) { aux=scanf("%d",&x); }
-void _scan(long long &x) { aux=scanf("%lld",&x); }
-void _scan(double &x) { aux=scanf("%lf",&x); }
-void _scan(char &x) { aux=scanf(" %c",&x); }
-void _scan( char *x) { aux=scanf("%s",x); }
-template<typename T>
-void _scan(vector<T> &v){
-	for(int i=0; i<(int)v.size(); i++) _scan(v[i]);
+void _scan(int &x) { aux = scanf("%d", &x); }
+void _scan(long long &x) { aux = scanf("%lld", &x); }
+void _scan(double &x) { aux = scanf("%lf", &x); }
+void _scan(char &x) { aux = scanf(" %c", &x); }
+void _scan(char *x) { aux = scanf("%s", x); }
+template <typename T>
+void _scan(vector<T> &v) {
+  for (int i = 0; i < (int)v.size(); i++) _scan(v[i]);
 }
 void scan() {}
-template<typename T, typename... U>
-void scan( T& head, U&... tail ) { _scan(head); scan(tail...);}
+template <typename T, typename... U>
+void scan(T &head, U &...tail) {
+  _scan(head);
+  scan(tail...);
+}
 /* ================================================= */
 
 #define sz(x) (int)x.size()
 
 int main() {
-  int tc; scan(tc);
+  int tc;
+  scan(tc);
   while (tc--) {
-    int a, b; scan(a,b);
-    int t=0, i=0;
+    int a, b;
+    scan(a, b);
+    int t = 0, i = 0;
 
     if (a < b) swap(a, b);
 
     while (true) {
       t += i++;
-      if ((a+t-b)%2 == 0 && t - (a+t-b)/2 >= 0) break; 
+      if ((a + t - b) % 2 == 0 && t - (a + t - b) / 2 >= 0) break;
     }
 
-    printf("%d\n", i-1);
+    printf("%d\n", i - 1);
   }
 
   return 0;

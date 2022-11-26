@@ -21,7 +21,7 @@ void _scan(vector<T> &v) {
 }
 void scan() {}
 template <typename T, typename... U>
-void scan(T &head, U &... tail) {
+void scan(T &head, U &...tail) {
   _scan(head);
   scan(tail...);
 }
@@ -32,7 +32,7 @@ void set_IO() {
 
 void _dbg(istream_iterator<string> it) {}
 template <typename T, typename... U>
-void _dbg(istream_iterator<string> it, T &head, U &... tail) {
+void _dbg(istream_iterator<string> it, T &head, U &...tail) {
   cout << *it << "=" << head << " ";
   _dbg(++it, tail...);
 }
@@ -63,35 +63,39 @@ const ll INF = 1e9;
 
 const int MAXK = 1e5;
 
-int n,k;
+int n, k;
 ll s[MAXK];
 
-ll bs(){
+ll bs() {
   ll l = -INF, r = INF;
-  while(r>l){
+  while (r > l) {
     ll mid = l + (r - l) / 2;
-    if((ll)(n-k+1) * mid >= s[0]) r = mid;
-    else l = mid+1;
+    if ((ll)(n - k + 1) * mid >= s[0])
+      r = mid;
+    else
+      l = mid + 1;
   }
   return r;
 }
 
-int main(){
+int main() {
   int tt;
   scan(tt);
-  while(tt--){
-      scan(n,k);
-      rep(i,0,k) scan(s[i]);
-      
-      vector<ll> a(k), b(k);
-      
-      rep(i,1,k) a[i] = b[i] = s[i] - s[i-1];
-      
-      a[0] = b[0] = bs();
-      sort(all(b));     
-      if(a == b) puts("YES");
-      else puts("NO");
+  while (tt--) {
+    scan(n, k);
+    rep(i, 0, k) scan(s[i]);
+
+    vector<ll> a(k), b(k);
+
+    rep(i, 1, k) a[i] = b[i] = s[i] - s[i - 1];
+
+    a[0] = b[0] = bs();
+    sort(all(b));
+    if (a == b)
+      puts("YES");
+    else
+      puts("NO");
   }
   return 0;
 }
-// "Si puedes imaginarlo puedes programarlo" Alejandro Taboada 
+// "Si puedes imaginarlo puedes programarlo" Alejandro Taboada

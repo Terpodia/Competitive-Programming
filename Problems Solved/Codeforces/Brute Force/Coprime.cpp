@@ -21,7 +21,7 @@ void _scan(vector<T> &v) {
 }
 void scan() {}
 template <typename T, typename... U>
-void scan(T &head, U &... tail) {
+void scan(T &head, U &...tail) {
   _scan(head);
   scan(tail...);
 }
@@ -32,7 +32,7 @@ void set_IO() {
 
 void _dbg(istream_iterator<string> it) {}
 template <typename T, typename... U>
-void _dbg(istream_iterator<string> it, T &head, U &... tail) {
+void _dbg(istream_iterator<string> it, T &head, U &...tail) {
   cout << *it << "=" << head << " ";
   _dbg(++it, tail...);
 }
@@ -57,36 +57,35 @@ mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
   }
 
 typedef __uint128_t u128;
-typedef pair<int,int> ii;
+typedef pair<int, int> ii;
 
 const int MAXN = 2e5 + 20;
 
 int n, a[MAXN];
 
-void solve(){
-  map<int,ii> mp;
-  rep(i,0,n){
-    if(mp.find(a[i]) == mp.end()){
-      mp[a[i]] = make_pair(i,i);
-    }
-    else{
+void solve() {
+  map<int, ii> mp;
+  rep(i, 0, n) {
+    if (mp.find(a[i]) == mp.end()) {
+      mp[a[i]] = make_pair(i, i);
+    } else {
       mp[a[i]].fst = min(mp[a[i]].fst, i);
       mp[a[i]].snd = max(mp[a[i]].snd, i);
     }
   }
   vector<int> x;
-  for(auto it=mp.begin(); it!=mp.end(); it++){
+  for (auto it = mp.begin(); it != mp.end(); it++) {
     x.pb(it->fst);
   }
 
-  int ans=-1;
+  int ans = -1;
   int m = sz(x);
-  rep(i,0,m){
-    rep(j,i,m){
-      if(__gcd(x[i],x[j])!=1) continue;
-      //ans = max(ans, mp[x[i]].fst + mp[x[j]].snd);
-      //ans = max(ans, mp[x[i]].snd + mp[x[j]].fst);
-      //ans = max(ans, mp[x[i]].fst + mp[x[j]].fst);
+  rep(i, 0, m) {
+    rep(j, i, m) {
+      if (__gcd(x[i], x[j]) != 1) continue;
+      // ans = max(ans, mp[x[i]].fst + mp[x[j]].snd);
+      // ans = max(ans, mp[x[i]].snd + mp[x[j]].fst);
+      // ans = max(ans, mp[x[i]].fst + mp[x[j]].fst);
       ans = max(ans, mp[x[i]].snd + mp[x[j]].snd + 2);
     }
   }
@@ -96,9 +95,9 @@ void solve(){
 int main() {
   int tt;
   scan(tt);
-  while(tt--){
-    scan(n); 
-    rep(i,0,n) scan(a[i]);
+  while (tt--) {
+    scan(n);
+    rep(i, 0, n) scan(a[i]);
     solve();
   }
   return 0;

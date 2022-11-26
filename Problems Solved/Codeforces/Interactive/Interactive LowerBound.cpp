@@ -21,7 +21,7 @@ void _scan(vector<T> &v) {
 }
 void scan() {}
 template <typename T, typename... U>
-void scan(T &head, U &... tail) {
+void scan(T &head, U &...tail) {
   _scan(head);
   scan(tail...);
 }
@@ -32,7 +32,7 @@ void set_IO() {
 
 void _dbg(istream_iterator<string> it) {}
 template <typename T, typename... U>
-void _dbg(istream_iterator<string> it, T &head, U &... tail) {
+void _dbg(istream_iterator<string> it, T &head, U &...tail) {
   cout << *it << "=" << head << " ";
   _dbg(++it, tail...);
 }
@@ -58,7 +58,7 @@ mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 
 typedef __uint128_t u128;
 
-void query(int i){
+void query(int i) {
   printf("? %d\n", i);
   fflush(stdout);
 }
@@ -68,38 +68,40 @@ int main() {
   scan(n, start, x);
 
   vector<int> a;
-  rep(i, 1, n+1) if (i != start) a.pb(i);
+  rep(i, 1, n + 1) if (i != start) a.pb(i);
   shuffle(all(a), rng);
   int m = min(sz(a), 998);
 
   int val, nxt, p, v;
   query(start);
-  scan(val, nxt); 
+  scan(val, nxt);
 
-  if(val >= x){
+  if (val >= x) {
     printf("! %d\n", val);
     fflush(stdout);
     return 0;
   }
   v = val, p = nxt;
 
-  rep(i, 0, m){
+  rep(i, 0, m) {
     query(a[i]);
     scan(val, nxt);
-    if(val <= x && v < val) v = val, p = nxt;
+    if (val <= x && v < val) v = val, p = nxt;
   }
 
-  int cnt=0;
-  while(p != -1 && cnt < 1000){
-    if(v >= x) break;
+  int cnt = 0;
+  while (p != -1 && cnt < 1000) {
+    if (v >= x) break;
     query(p);
     scan(val, nxt);
     v = val, p = nxt;
     cnt++;
   }
 
-  if(v < x) printf("! %d\n", -1);
-  else printf("! %d\n", v);
+  if (v < x)
+    printf("! %d\n", -1);
+  else
+    printf("! %d\n", v);
   fflush(stdout);
 
   return 0;

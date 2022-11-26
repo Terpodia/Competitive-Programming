@@ -1,13 +1,14 @@
 #include <cstdio>
 
-int main(){
-    int t;
-    scanf("%d",&t);
-    
-    while(t--){
-        int n, m, k; scanf("%d%d%d",&n,&m,&k);
-        (n*m-1 == k)? puts("YES") : puts("NO"); 
-    }
+int main() {
+  int t;
+  scanf("%d", &t);
 
-    return 0;
+  while (t--) {
+    int n, m, k;
+    scanf("%d%d%d", &n, &m, &k);
+    (n * m - 1 == k) ? puts("YES") : puts("NO");
+  }
+
+  return 0;
 }

@@ -21,7 +21,7 @@ void _scan(vector<T> &v) {
 }
 void scan() {}
 template <typename T, typename... U>
-void scan(T &head, U &... tail) {
+void scan(T &head, U &...tail) {
   _scan(head);
   scan(tail...);
 }
@@ -32,7 +32,7 @@ void set_IO() {
 
 void _dbg(istream_iterator<string> it) {}
 template <typename T, typename... U>
-void _dbg(istream_iterator<string> it, T &head, U &... tail) {
+void _dbg(istream_iterator<string> it, T &head, U &...tail) {
   cout << *it << "=" << head << " ";
   _dbg(++it, tail...);
 }
@@ -63,32 +63,33 @@ const int INF = 1e9;
 int main() {
   int tt;
   scan(tt);
-  while(tt--){
+  while (tt--) {
     int n;
     scan(n);
     int a[n];
-    rep(i,0,n) scan(a[i]);
+    rep(i, 0, n) scan(a[i]);
     int acc = a[0];
-    rep(i,1,n) acc = __gcd(a[i], acc);
+    rep(i, 1, n) acc = __gcd(a[i], acc);
 
-    if(acc==1) puts("0");
-    else{
-      int pref[n+1], suff[n+1];
+    if (acc == 1)
+      puts("0");
+    else {
+      int pref[n + 1], suff[n + 1];
       pref[0] = 0, suff[n] = 0;
-      rep(i,1,n+1) pref[i] = __gcd(pref[i-1], a[i-1]);
-      rep(i,n-1,-1) suff[i] = __gcd(suff[i+1], a[i]);
+      rep(i, 1, n + 1) pref[i] = __gcd(pref[i - 1], a[i - 1]);
+      rep(i, n - 1, -1) suff[i] = __gcd(suff[i + 1], a[i]);
 
-      int ans=INF;
-      rep(i,n-1,-1){
-        if(__gcd(__gcd(a[i], i+1), __gcd(pref[i], suff[i+1])) == 1){
-          ans = n - (i+1) + 1; 
+      int ans = INF;
+      rep(i, n - 1, -1) {
+        if (__gcd(__gcd(a[i], i + 1), __gcd(pref[i], suff[i + 1])) == 1) {
+          ans = n - (i + 1) + 1;
           break;
         }
       }
-      rep(i,0,n){
-        rep(j,n-1,-1){
-          if(__gcd(i+1, j+1) == 1) 
-            ans = min(ans, n-(i+1)+1 + n-(j+1)+1);
+      rep(i, 0, n) {
+        rep(j, n - 1, -1) {
+          if (__gcd(i + 1, j + 1) == 1)
+            ans = min(ans, n - (i + 1) + 1 + n - (j + 1) + 1);
         }
       }
       printf("%d\n", ans);

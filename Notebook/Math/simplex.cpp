@@ -67,4 +67,3 @@ pair<double, vector<double> > simplex(  // maximize c^T x s.t. Ax<=b, x>=0
 }
 
 int main() { return 0; }
-

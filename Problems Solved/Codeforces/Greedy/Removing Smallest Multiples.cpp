@@ -21,7 +21,7 @@ void _scan(vector<T> &v) {
 }
 void scan() {}
 template <typename T, typename... U>
-void scan(T &head, U &... tail) {
+void scan(T &head, U &...tail) {
   _scan(head);
   scan(tail...);
 }
@@ -32,7 +32,7 @@ void set_IO() {
 
 void _dbg(istream_iterator<string> it) {}
 template <typename T, typename... U>
-void _dbg(istream_iterator<string> it, T &head, U &... tail) {
+void _dbg(istream_iterator<string> it, T &head, U &...tail) {
   cout << *it << "=" << head << " ";
   _dbg(++it, tail...);
 }
@@ -62,24 +62,24 @@ typedef long long ll;
 int main() {
   set_IO();
   int tt;
-  cin>>tt;
-  while(tt--){
+  cin >> tt;
+  while (tt--) {
     int n;
-    cin>>n;
+    cin >> n;
     string t;
-    cin>>t;
-    
-    ll ans=0;
-	rep(i,1,n+1){
-	  for(int j=i; j<=n; j+=i){
-	    if(t[j-1] == '1') break;
-	    if(t[j-1] == 'x') continue;
-	    
-	    t[j-1] = 'x';
-	    ans += (ll)i;
-	  }
-	}
-    cout<<ans<<"\n";
+    cin >> t;
+
+    ll ans = 0;
+    rep(i, 1, n + 1) {
+      for (int j = i; j <= n; j += i) {
+        if (t[j - 1] == '1') break;
+        if (t[j - 1] == 'x') continue;
+
+        t[j - 1] = 'x';
+        ans += (ll)i;
+      }
+    }
+    cout << ans << "\n";
   }
   return 0;
 }

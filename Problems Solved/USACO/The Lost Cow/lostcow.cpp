@@ -2,35 +2,44 @@
 #include <iostream>
 using namespace std;
 
-int main(){
-    ifstream fin; ofstream fout;
-    fin.open("lostcow.in"); fout.open("lostcow.out");
-    
-    int x, y, pos, val=1; fin >> x >> y;
-    pos = x;
-    int ans=0;
-    
-    int dir = 1;
+int main() {
+  ifstream fin;
+  ofstream fout;
+  fin.open("lostcow.in");
+  fout.open("lostcow.out");
 
-    while(true){
-        int l, r;
-        if(dir==1){ l = x; r = x+val;}
-        else { l = x-val; r = x; }
+  int x, y, pos, val = 1;
+  fin >> x >> y;
+  pos = x;
+  int ans = 0;
 
-        if(y >= l && y <= r){
-            ans += abs(pos - y);
-            break;
-        }
-        
-        ans += abs(pos - (x+(val*dir)));
-        pos = x+(val*dir);
+  int dir = 1;
 
-        val *= 2;
-        dir *= -1;
+  while (true) {
+    int l, r;
+    if (dir == 1) {
+      l = x;
+      r = x + val;
+    } else {
+      l = x - val;
+      r = x;
     }
 
-    fout << ans << "\n";
+    if (y >= l && y <= r) {
+      ans += abs(pos - y);
+      break;
+    }
 
-    fin.close(); fout.close();
-    return 0;
+    ans += abs(pos - (x + (val * dir)));
+    pos = x + (val * dir);
+
+    val *= 2;
+    dir *= -1;
+  }
+
+  fout << ans << "\n";
+
+  fin.close();
+  fout.close();
+  return 0;
 }

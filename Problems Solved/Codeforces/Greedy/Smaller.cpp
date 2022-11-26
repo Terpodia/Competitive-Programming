@@ -21,7 +21,7 @@ void _scan(vector<T> &v) {
 }
 void scan() {}
 template <typename T, typename... U>
-void scan(T &head, U &... tail) {
+void scan(T &head, U &...tail) {
   _scan(head);
   scan(tail...);
 }
@@ -32,7 +32,7 @@ void set_IO() {
 
 void _dbg(istream_iterator<string> it) {}
 template <typename T, typename... U>
-void _dbg(istream_iterator<string> it, T &head, U &... tail) {
+void _dbg(istream_iterator<string> it, T &head, U &...tail) {
   cout << *it << "=" << head << " ";
   _dbg(++it, tail...);
 }
@@ -62,32 +62,35 @@ typedef long long ll;
 int main() {
   set_IO();
   int tt;
-  cin>>tt;
-  while(tt--){
-    ll l1=1, l2=1;
-    bool x1=false, x2=false;
+  cin >> tt;
+  while (tt--) {
+    ll l1 = 1, l2 = 1;
+    bool x1 = false, x2 = false;
     int q;
-    cin>>q;
-    while(q--){
-      int d,k;
+    cin >> q;
+    while (q--) {
+      int d, k;
       string s;
       cin >> d >> k >> s;
 
-      if(d==1){
+      if (d == 1) {
         l1 += (ll)sz(s) * (ll)k;
-        for(char c : s) if(c != 'a') x1 = true;
-      }
-      else{
+        for (char c : s)
+          if (c != 'a') x1 = true;
+      } else {
         l2 += (ll)sz(s) * (ll)k;
-        for(char c : s) if(c != 'a') x2 = true;
+        for (char c : s)
+          if (c != 'a') x2 = true;
       }
 
-      if(!x1 && !x2){
-        if(l1 < l2) cout<<"YES\n"; 
-        else cout<<"NO\n";
+      if (!x1 && !x2) {
+        if (l1 < l2)
+          cout << "YES\n";
+        else
+          cout << "NO\n";
       }
-      if(x1 && !x2) cout<<"NO\n";
-      if(x2) cout<<"YES\n";
+      if (x1 && !x2) cout << "NO\n";
+      if (x2) cout << "YES\n";
     }
   }
   return 0;

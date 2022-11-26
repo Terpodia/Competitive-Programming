@@ -64,8 +64,8 @@ int main() {
     ll a[n];
     rep(i, 0, n) cin >> a[i];
     bool can = false;
-    ll cnt=0;
-    rep(i, 1, n-1) {
+    ll cnt = 0;
+    rep(i, 1, n - 1) {
       cnt += (a[i] + 1) / 2;
       can |= (a[i] > 1);
     }
@@ -74,4 +74,3 @@ int main() {
   }
   return 📈;
 }
-

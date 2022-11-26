@@ -7,25 +7,28 @@ using namespace std;
 void fastIO() { cin.tie(0)->sync_with_stdio(0); }
 
 int main() {
-    fastIO();
-    int n, m; cin >> n >> m;
-    int a[n];
-    for(int i=0; i<n; i++) cin >> a[i];
+  fastIO();
+  int n, m;
+  cin >> n >> m;
+  int a[n];
+  for (int i = 0; i < n; i++) cin >> a[i];
 
-    map<int,int> mp; 
-    for(int i=0; i<n; i++) mp[a[i]]++;
-    int ans[n]; ans[0] = sz(mp); 
+  map<int, int> mp;
+  for (int i = 0; i < n; i++) mp[a[i]]++;
+  int ans[n];
+  ans[0] = sz(mp);
 
-    for(int i=1; i<n; i++) {
-        mp[a[i-1]]--;
-        if(mp[a[i-1]] == 0) mp.erase(a[i-1]);
-        ans[i] = sz(mp);
-    }
+  for (int i = 1; i < n; i++) {
+    mp[a[i - 1]]--;
+    if (mp[a[i - 1]] == 0) mp.erase(a[i - 1]);
+    ans[i] = sz(mp);
+  }
 
-    while(m--) {
-        int l; cin >> l;
-        cout << ans[l-1] << "\n";
-    }
+  while (m--) {
+    int l;
+    cin >> l;
+    cout << ans[l - 1] << "\n";
+  }
 
-    return 0;
+  return 0;
 }

@@ -1,5 +1,5 @@
-#include <cstdio>
 #include <algorithm>
+#include <cstdio>
 #include <vector>
 using namespace std;
 
@@ -11,25 +11,21 @@ int main() {
   int n;
   aux = scanf("%d", &n);
   vector<ll> a(n);
-  for (int i = 0; i < n; i++)
-    aux = scanf("%lld", &a[i]);
+  for (int i = 0; i < n; i++) aux = scanf("%lld", &a[i]);
 
   int m;
   aux = scanf("%d", &m);
 
   ll x[m], y[m];
-  for (int i = 0; i < m; i++)
-    aux = scanf("%lld%lld", x + i, y + i);
+  for (int i = 0; i < m; i++) aux = scanf("%lld%lld", x + i, y + i);
 
   sort(a.begin(), a.end());
   ll s = 0;
-  for (int i = 0; i < n; i++)
-    s += a[i];
+  for (int i = 0; i < n; i++) s += a[i];
 
   for (int i = 0; i < m; i++) {
     auto it = lower_bound(a.begin(), a.end(), x[i]);
-    if (it == a.end())
-      it--;
+    if (it == a.end()) it--;
 
     if (it == a.begin()) {
       printf("%lld\n", max((ll)0, y[i] - s + *it) + max((ll)0, x[i] - *it));

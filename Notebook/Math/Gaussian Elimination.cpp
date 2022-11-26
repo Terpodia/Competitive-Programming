@@ -1,6 +1,6 @@
+#include <cmath>
 #include <iostream>
 #include <vector>
-#include <cmath>
 using namespace std;
 
 typedef vector<double> vd;
@@ -12,16 +12,13 @@ int forwardElim(vvd &m) {
     int i_max = k;
     double v_max = m[i_max][k];
     for (int i = k + 1; i < sz(m); i++) {
-      if (v_max < abs(m[i][k]))
-        i_max = i, v_max = abs(m[i][k]);
+      if (v_max < abs(m[i][k])) i_max = i, v_max = abs(m[i][k]);
     }
     swap(m[k], m[i_max]);
-    if (!m[k][k])
-      return k;
+    if (!m[k][k]) return k;
     for (int i = k + 1; i < sz(m); i++) {
       double f = m[i][k] / m[k][k];
-      for (int j = k + 1; j <= sz(m); j++)
-        m[i][j] -= m[k][j] * f;
+      for (int j = k + 1; j <= sz(m); j++) m[i][j] -= m[k][j] * f;
       m[i][k] = 0;
     }
   }
@@ -41,13 +38,11 @@ void solve(vvd &m) {
   double x[sz(m)];
   for (int i = sz(m) - 1; i > -1; i--) {
     x[i] = m[i][sz(m)];
-    for (int j = i + 1; j < sz(m); j++)
-      x[i] -= x[j] * m[i][j];
+    for (int j = i + 1; j < sz(m); j++) x[i] -= x[j] * m[i][j];
     x[i] /= m[i][i];
   }
   printf("Solution for the system:\n");
-  for (int i = 0; i < sz(m); i++)
-    printf("%lf\n", x[i]);
+  for (int i = 0; i < sz(m); i++) printf("%lf\n", x[i]);
 }
 
 int main() {
@@ -64,4 +59,3 @@ int main() {
   solve(m);
   return 0;
 }
-

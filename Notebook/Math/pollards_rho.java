@@ -1,7 +1,7 @@
 import java.io.*;
 import java.math.*;
-import java.util.*;
 import java.security.SecureRandom;
+import java.util.*;
 
 class Main {
   private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -21,7 +21,8 @@ class Main {
   }
 
   private static BigInteger rho(BigInteger n) {
-    if (n.mod(TWO).compareTo(BigInteger.ZERO) == 0) return TWO;
+    if (n.mod(TWO).compareTo(BigInteger.ZERO) == 0)
+      return TWO;
     BigInteger b = new BigInteger(n.bitLength(), random);
     BigInteger x = new BigInteger(n.bitLength(), random);
     BigInteger y = x;
@@ -37,10 +38,11 @@ class Main {
   }
 
   public static void pollard_rho(BigInteger n) {
-    if (n.compareTo(BigInteger.ONE) <= 0) return;
+    if (n.compareTo(BigInteger.ONE) <= 0)
+      return;
     if (n.isProbablePrime(10)) {
       int count = factors.containsKey(n) ? factors.get(n) : 0;
-      factors.put(n, count+1);
+      factors.put(n, count + 1);
       return;
     }
     BigInteger d = rho(n);
@@ -51,12 +53,11 @@ class Main {
   public static void main(String[] args) {
     BigInteger n = sc.nextBigInteger();
     pollard_rho(n);
-    
+
     for (Map.Entry<BigInteger, Integer> entry : factors.entrySet()) {
       pw.println(entry.getKey() + "^" + entry.getValue());
     }
 
-    pw.close();    
+    pw.close();
   }
 }
-

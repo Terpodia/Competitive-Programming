@@ -1,5 +1,6 @@
-#include <fstream>
 #include <sched.h>
+
+#include <fstream>
 #include <vector>
 using namespace std;
 
@@ -12,47 +13,53 @@ char type[MAXN];
 
 int N, M, index = 0;
 
-void DFS(int i){
-    vis[i] = true;
-    component[i] = index;
-    for(int v : G[i])
-        if(!vis[v] && type[v] == type[i]) DFS(v);
+void DFS(int i) {
+  vis[i] = true;
+  component[i] = index;
+  for (int v : G[i])
+    if (!vis[v] && type[v] == type[i]) DFS(v);
 }
 
-void fullDFS(){
-    for(int i=0; i<N; i++){
-        if(!vis[i]){
-            DFS(i);
-            index++;
-        }
+void fullDFS() {
+  for (int i = 0; i < N; i++) {
+    if (!vis[i]) {
+      DFS(i);
+      index++;
     }
+  }
 }
 
-int main(){
-    ifstream fin; ofstream fout;
-    fin.open("milkvisits.in");
-    fout.open("milkvisits.out");
+int main() {
+  ifstream fin;
+  ofstream fout;
+  fin.open("milkvisits.in");
+  fout.open("milkvisits.out");
 
-    fin >> N >> M;
-    
-    for(int i=0; i<N; i++) fin >> type[i];
+  fin >> N >> M;
 
-    for(int i=0; i<N-1; i++){
-        int x, y; fin >> x >> y;
-        G[x-1].push_back(y-1); G[y-1].push_back(x-1);
-    }
+  for (int i = 0; i < N; i++) fin >> type[i];
 
-    fullDFS();
-    
-    while(M--){
-        int A, B; char C;
-        fin >> A >> B >> C;
-        if(component[A-1] != component[B-1] || type[A-1] == C)
-            fout << "1";
+  for (int i = 0; i < N - 1; i++) {
+    int x, y;
+    fin >> x >> y;
+    G[x - 1].push_back(y - 1);
+    G[y - 1].push_back(x - 1);
+  }
 
-        else fout << "0";
-    }
+  fullDFS();
 
-    fin.close(); fout.close();
-    return 0;
+  while (M--) {
+    int A, B;
+    char C;
+    fin >> A >> B >> C;
+    if (component[A - 1] != component[B - 1] || type[A - 1] == C)
+      fout << "1";
+
+    else
+      fout << "0";
+  }
+
+  fin.close();
+  fout.close();
+  return 0;
 }

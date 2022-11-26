@@ -21,7 +21,7 @@ void _scan(vector<T> &v) {
 }
 void scan() {}
 template <typename T, typename... U>
-void scan(T &head, U &... tail) {
+void scan(T &head, U &...tail) {
   _scan(head);
   scan(tail...);
 }
@@ -32,7 +32,7 @@ void set_IO() {
 
 void _dbg(istream_iterator<string> it) {}
 template <typename T, typename... U>
-void _dbg(istream_iterator<string> it, T &head, U &... tail) {
+void _dbg(istream_iterator<string> it, T &head, U &...tail) {
   cout << *it << "=" << head << " ";
   _dbg(++it, tail...);
 }
@@ -62,21 +62,21 @@ typedef long long ll;
 int main() {
   int tt;
   scan(tt);
-  while(tt--){
-      int n, k;
-      scan(n,k);
-      ll a[n];
-      rep(i,0,n) scan(a[i]);
-      
-      ll ans=0;
-      ll b[k];
-      
-      rep(i,0,k) b[i]=0;
-      rep(i,0,n) b[(i+1)%k] = max(b[(i+1)%k], a[i]);
-      rep(i,0,k) ans+=b[i];
-      
-      printf("%lld\n", ans);
+  while (tt--) {
+    int n, k;
+    scan(n, k);
+    ll a[n];
+    rep(i, 0, n) scan(a[i]);
+
+    ll ans = 0;
+    ll b[k];
+
+    rep(i, 0, k) b[i] = 0;
+    rep(i, 0, n) b[(i + 1) % k] = max(b[(i + 1) % k], a[i]);
+    rep(i, 0, k) ans += b[i];
+
+    printf("%lld\n", ans);
   }
   return 0;
 }
-// "Si puedes imaginarlo puedes programarlo" Alejandro Taboada 
+// "Si puedes imaginarlo puedes programarlo" Alejandro Taboada

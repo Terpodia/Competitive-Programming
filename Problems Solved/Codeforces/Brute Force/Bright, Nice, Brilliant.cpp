@@ -21,7 +21,7 @@ void _scan(vector<T> &v) {
 }
 void scan() {}
 template <typename T, typename... U>
-void scan(T &head, U &... tail) {
+void scan(T &head, U &...tail) {
   _scan(head);
   scan(tail...);
 }
@@ -32,7 +32,7 @@ void set_IO() {
 
 void _dbg(istream_iterator<string> it) {}
 template <typename T, typename... U>
-void _dbg(istream_iterator<string> it, T &head, U &... tail) {
+void _dbg(istream_iterator<string> it, T &head, U &...tail) {
   cout << *it << "=" << head << " ";
   _dbg(++it, tail...);
 }
@@ -61,13 +61,15 @@ typedef __uint128_t u128;
 int main() {
   int tt;
   scan(tt);
-  while(tt--){
+  while (tt--) {
     int n;
     scan(n);
-    rep(i,1,n+1) rep(j,0,i){
-      if(j==0 || j==i-1) printf("1");
-      else printf("0");
-      printf("%c", " \n"[j == i-1]);
+    rep(i, 1, n + 1) rep(j, 0, i) {
+      if (j == 0 || j == i - 1)
+        printf("1");
+      else
+        printf("0");
+      printf("%c", " \n"[j == i - 1]);
     }
   }
   return 0;

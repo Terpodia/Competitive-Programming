@@ -21,7 +21,7 @@ void _scan(vector<T> &v) {
 }
 void scan() {}
 template <typename T, typename... U>
-void scan(T &head, U &... tail) {
+void scan(T &head, U &...tail) {
   _scan(head);
   scan(tail...);
 }
@@ -32,7 +32,7 @@ void set_IO() {
 
 void _dbg(istream_iterator<string> it) {}
 template <typename T, typename... U>
-void _dbg(istream_iterator<string> it, T &head, U &... tail) {
+void _dbg(istream_iterator<string> it, T &head, U &...tail) {
   cout << *it << "=" << head << " ";
   _dbg(++it, tail...);
 }
@@ -58,29 +58,31 @@ mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 
 typedef __uint128_t u128;
 
-const int rmv[8] = {2,2,1,1,-2,-2,-1,-1};
-const int cmv[8] = {1,-1,2,-2,1,-1,2,-2};
+const int rmv[8] = {2, 2, 1, 1, -2, -2, -1, -1};
+const int cmv[8] = {1, -1, 2, -2, 1, -1, 2, -2};
 
-int main(){
+int main() {
   int tt;
   scan(tt);
-  while(tt--){
-    int n,m;
-    scan(n,m);
+  while (tt--) {
+    int n, m;
+    scan(n, m);
     int r = -1, c = -1;
 
-    rep(i,0,n) rep(j,0,m){
-      bool can=true;
-      rep(_,0,8){
+    rep(i, 0, n) rep(j, 0, m) {
+      bool can = true;
+      rep(_, 0, 8) {
         int x = i + rmv[_], y = j + cmv[_];
-        if(x >= 0 && y >= 0 && x < n && y < m) can=false;
+        if (x >= 0 && y >= 0 && x < n && y < m) can = false;
       }
-      if(can) r=i,c=j;
+      if (can) r = i, c = j;
     }
 
-    if(r == -1) printf("%d %d\n", 1, 1);
-    else printf("%d %d\n", r+1, c+1);
+    if (r == -1)
+      printf("%d %d\n", 1, 1);
+    else
+      printf("%d %d\n", r + 1, c + 1);
   }
   return 0;
 }
-// "Si puedes imaginarlo puedes programarlo" Alejandro Taboada 
+// "Si puedes imaginarlo puedes programarlo" Alejandro Taboada

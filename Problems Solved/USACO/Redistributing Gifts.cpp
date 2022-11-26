@@ -45,4 +45,3 @@ int main() {
   rep(i, 0, n) cout << ans[i] + 1 << "\n";
   return 0;
 }
-

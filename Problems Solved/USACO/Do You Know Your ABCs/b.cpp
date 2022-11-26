@@ -1,9 +1,9 @@
-#include <iostream>
-#include <cmath>
-#include <vector>
-#include <set>
 #include <algorithm>
+#include <cmath>
+#include <iostream>
+#include <set>
 #include <tuple>
+#include <vector>
 using namespace std;
 
 typedef long double ld;
@@ -23,12 +23,10 @@ int forwardElim(vvd &m) {
     int i_max = k;
     ld v_max = m[k][k];
     FOR(i, k + 1, 3) {
-      if (v_max < abs(m[i][k]))
-        v_max = abs(m[i][k]), i_max = i;
+      if (v_max < abs(m[i][k])) v_max = abs(m[i][k]), i_max = i;
     }
     swap(m[i_max], m[k]);
-    if (!m[k][k])
-      return k;
+    if (!m[k][k]) return k;
     FOR(i, k + 1, 3) {
       ld f = m[i][k] / m[k][k];
       FOR(j, k + 1, 4) m[i][j] -= f * m[k][j];
@@ -39,8 +37,7 @@ int forwardElim(vvd &m) {
 }
 
 tuple<int, int, int> gaussElimination(vvd &m) {
-  if (forwardElim(m) != -1)
-    return make_tuple(-1, -1, -1);
+  if (forwardElim(m) != -1) return make_tuple(-1, -1, -1);
   ld xs[3];
   ROF(i, 2, -1) {
     xs[i] = m[i][3];
@@ -84,23 +81,15 @@ void solve() {
 
   auto [A, B, C] = gaussElimination(m);
 
-  if (A < 1 || B < 1 || C < 1 || A > B || A > C || B > C)
-    return;
+  if (A < 1 || B < 1 || C < 1 || A > B || A > C || B > C) return;
 
-  if ((int)k[0][3] != -1 && (int)k[0][3] != A)
-    return;
-  if ((int)k[1][3] != -1 && (int)k[1][3] != B)
-    return;
-  if ((int)k[2][3] != -1 && (int)k[2][3] != C)
-    return;
-  if ((int)k[3][3] != -1 && (int)k[3][3] != A + B)
-    return;
-  if ((int)k[4][3] != -1 && (int)k[4][3] != A + C)
-    return;
-  if ((int)k[5][3] != -1 && (int)k[5][3] != B + C)
-    return;
-  if ((int)k[6][3] != -1 && (int)k[6][3] != A + B + C)
-    return;
+  if ((int)k[0][3] != -1 && (int)k[0][3] != A) return;
+  if ((int)k[1][3] != -1 && (int)k[1][3] != B) return;
+  if ((int)k[2][3] != -1 && (int)k[2][3] != C) return;
+  if ((int)k[3][3] != -1 && (int)k[3][3] != A + B) return;
+  if ((int)k[4][3] != -1 && (int)k[4][3] != A + C) return;
+  if ((int)k[5][3] != -1 && (int)k[5][3] != B + C) return;
+  if ((int)k[6][3] != -1 && (int)k[6][3] != A + B + C) return;
 
   s.insert(make_tuple(A, B, C));
 }
@@ -121,4 +110,3 @@ int main() {
   }
   return 0;
 }
-

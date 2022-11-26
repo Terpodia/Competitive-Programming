@@ -21,7 +21,7 @@ void _scan(vector<T> &v) {
 }
 void scan() {}
 template <typename T, typename... U>
-void scan(T &head, U &... tail) {
+void scan(T &head, U &...tail) {
   _scan(head);
   scan(tail...);
 }
@@ -32,7 +32,7 @@ void set_IO() {
 
 void _dbg(istream_iterator<string> it) {}
 template <typename T, typename... U>
-void _dbg(istream_iterator<string> it, T &head, U &... tail) {
+void _dbg(istream_iterator<string> it, T &head, U &...tail) {
   cout << *it << "=" << head << " ";
   _dbg(++it, tail...);
 }
@@ -62,25 +62,25 @@ typedef long long ll;
 const int MAXN = 2e5 + 20;
 const ll INF = 1e18;
 
-int n,q;
+int n, q;
 ll a[MAXN];
 
-void solve(){
+void solve() {
   vector<ll> l, r, ans;
-  l.pb(0), r.pb(a[0]-1), ans.pb(0);
+  l.pb(0), r.pb(a[0] - 1), ans.pb(0);
 
-  ll sum=a[0], hi=a[0];
+  ll sum = a[0], hi = a[0];
 
-  rep(i,1,n){
-    if(hi < a[i]){
-      l.pb(hi), r.pb(a[i]-1), ans.pb(sum);
+  rep(i, 1, n) {
+    if (hi < a[i]) {
+      l.pb(hi), r.pb(a[i] - 1), ans.pb(sum);
       hi = a[i];
     }
     sum += a[i];
   }
   l.pb(hi), r.pb(INF), ans.pb(sum);
 
-  while(q--){
+  while (q--) {
     ll k;
     scan(k);
     int j = distance(r.begin(), lower_bound(all(r), k));
@@ -92,9 +92,9 @@ void solve(){
 int main() {
   int tt;
   scan(tt);
-  while(tt--){
-    scan(n,q); 
-    rep(i,0,n) scan(a[i]);
+  while (tt--) {
+    scan(n, q);
+    rep(i, 0, n) scan(a[i]);
     solve();
   }
   return 0;

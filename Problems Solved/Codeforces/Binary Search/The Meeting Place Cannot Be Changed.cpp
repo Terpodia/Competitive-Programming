@@ -1,6 +1,6 @@
-#include <iostream>
 #include <algorithm>
 #include <cmath>
+#include <iostream>
 using namespace std;
 
 typedef long double ld;
@@ -13,43 +13,46 @@ int n;
 ld x[MAXN], v[MAXN];
 
 bool can(ld t) {
-    pair<ld, ld> s[n];
-    for(int i=0; i<n; i++) { 
-        s[i] = make_pair(x[i] - v[i]*t, x[i] + v[i]*t); 
-    }
+  pair<ld, ld> s[n];
+  for (int i = 0; i < n; i++) {
+    s[i] = make_pair(x[i] - v[i] * t, x[i] + v[i] * t);
+  }
 
-    sort(s, s+n);
+  sort(s, s + n);
 
-    ld r = s[0].second;
-    for(int i=1; i<n; i++) {
-        if(s[i].first > r) return false;
-        r = min(s[i].second, r);
-    }
+  ld r = s[0].second;
+  for (int i = 1; i < n; i++) {
+    if (s[i].first > r) return false;
+    r = min(s[i].second, r);
+  }
 
-    return true;
+  return true;
 }
 
 ld solve() {
-    int cnt=0;
-    ld l=0, r=INF, ans=INF;
+  int cnt = 0;
+  ld l = 0, r = INF, ans = INF;
 
-    while(cnt < 70) {
-        ld mid = l + (r-l)/2;
-        if(can(mid)) { ans = mid; r = mid - EPS; } 
-        else l = mid + EPS;
+  while (cnt < 70) {
+    ld mid = l + (r - l) / 2;
+    if (can(mid)) {
+      ans = mid;
+      r = mid - EPS;
+    } else
+      l = mid + EPS;
 
-        cnt++;
-    }
+    cnt++;
+  }
 
-    return ans;
+  return ans;
 }
 
 int main() {
-    scanf("%d",&n);
-    for(int i=0; i<n; i++) scanf("%Lf", x+i);
-    for(int i=0; i<n; i++) scanf("%Lf", v+i);
+  scanf("%d", &n);
+  for (int i = 0; i < n; i++) scanf("%Lf", x + i);
+  for (int i = 0; i < n; i++) scanf("%Lf", v + i);
 
-    printf("%.12Lf\n", solve());
+  printf("%.12Lf\n", solve());
 
-    return 0;
+  return 0;
 }

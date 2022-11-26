@@ -21,7 +21,7 @@ void _scan(vector<T> &v) {
 }
 void scan() {}
 template <typename T, typename... U>
-void scan(T &head, U &... tail) {
+void scan(T &head, U &...tail) {
   _scan(head);
   scan(tail...);
 }
@@ -32,7 +32,7 @@ void set_IO() {
 
 void _dbg(istream_iterator<string> it) {}
 template <typename T, typename... U>
-void _dbg(istream_iterator<string> it, T &head, U &... tail) {
+void _dbg(istream_iterator<string> it, T &head, U &...tail) {
   cout << *it << "=" << head << " ";
   _dbg(++it, tail...);
 }
@@ -63,25 +63,24 @@ const int INF = 2e9 + 8;
 int main() {
   int tt;
   scan(tt);
-  while(tt--){
+  while (tt--) {
     int n;
     scan(n);
     int a[n];
-    rep(i,0,n) scan(a[i]);
-    sort(a,a+n);
+    rep(i, 0, n) scan(a[i]);
+    sort(a, a + n);
 
-    map<int,int> mp;
-    rep(i,0,n) mp[a[i]]++;
+    map<int, int> mp;
+    rep(i, 0, n) mp[a[i]]++;
 
     int ans = INF;
-    rep(i,1,n-1){      
-        ans = min(ans, a[i+1] - a[i] + a[i] - a[i-1]);
-        //if(i < n-1) ans = min(ans, a[i+1] - a[i] + a[i+2] - a[i]);
-        //if(i > 1) ans = min(ans, a[i] - a[i-1] + a[i] - a[i-2]);
+    rep(i, 1, n - 1) {
+      ans = min(ans, a[i + 1] - a[i] + a[i] - a[i - 1]);
+      // if(i < n-1) ans = min(ans, a[i+1] - a[i] + a[i+2] - a[i]);
+      // if(i > 1) ans = min(ans, a[i] - a[i-1] + a[i] - a[i-2]);
     }
 
-    printf("%d\n",ans);
-
+    printf("%d\n", ans);
   }
   return 0;
 }

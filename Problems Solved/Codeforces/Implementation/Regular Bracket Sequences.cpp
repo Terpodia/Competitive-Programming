@@ -23,10 +23,8 @@ int main() {
     int l = 0, r = n * 2 - 1, m = 0;
 
     while (r > l) {
-      for (int i = l; i <= r; i++)
-        cout << s[i];
-      for (int i = 0; i < m; i++)
-        cout << "()";
+      for (int i = l; i <= r; i++) cout << s[i];
+      for (int i = 0; i < m; i++) cout << "()";
 
       cout << "\n";
       m++, r--, l++;

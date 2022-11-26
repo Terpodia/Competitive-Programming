@@ -21,7 +21,7 @@ void _scan(vector<T> &v) {
 }
 void scan() {}
 template <typename T, typename... U>
-void scan(T &head, U &... tail) {
+void scan(T &head, U &...tail) {
   _scan(head);
   scan(tail...);
 }
@@ -32,7 +32,7 @@ void set_IO() {
 
 void _dbg(istream_iterator<string> it) {}
 template <typename T, typename... U>
-void _dbg(istream_iterator<string> it, T &head, U &... tail) {
+void _dbg(istream_iterator<string> it, T &head, U &...tail) {
   cout << *it << "=" << head << " ";
   _dbg(++it, tail...);
 }
@@ -58,27 +58,31 @@ mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 
 typedef __uint128_t u128;
 
-int main(){
+int main() {
   int tt;
   scan(tt);
-  while(tt--){
-      int n;
-      scan(n);
-      int d[n],a[n];
-      rep(i,0,n) scan(d[i]);
-      bool can=true;
-      
-      a[0]=d[0];
-      rep(i,1,n){
-        if(a[i-1] >= d[i] && d[i] != 0){can=false;break;}
-        a[i] = d[i] + a[i-1];
+  while (tt--) {
+    int n;
+    scan(n);
+    int d[n], a[n];
+    rep(i, 0, n) scan(d[i]);
+    bool can = true;
+
+    a[0] = d[0];
+    rep(i, 1, n) {
+      if (a[i - 1] >= d[i] && d[i] != 0) {
+        can = false;
+        break;
       }
-      
-      if(!can) puts("-1");
-      else{
-          rep(i,0,n) printf("%d%c",a[i]," \n"[i == n-1]);
-      }
+      a[i] = d[i] + a[i - 1];
+    }
+
+    if (!can)
+      puts("-1");
+    else {
+      rep(i, 0, n) printf("%d%c", a[i], " \n"[i == n - 1]);
+    }
   }
   return 0;
 }
-// "Si puedes imaginarlo puedes programarlo" Alejandro Taboada 
+// "Si puedes imaginarlo puedes programarlo" Alejandro Taboada

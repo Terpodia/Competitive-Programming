@@ -51,4 +51,3 @@ int main() {
   printf("%d\n", dp[0][n - 1]);
   return 0;
 }
-

@@ -60,17 +60,20 @@ int main() {
     bool can_in_one = false;
 
     FOR(i, 0, n) FOR(j, 0, m) if (a[i][j] == 'B') has_black = true;
-    if (!has_black) cout << "-1\n";
-    else if (a[r][c] == 'B') cout << "0\n";
+    if (!has_black)
+      cout << "-1\n";
+    else if (a[r][c] == 'B')
+      cout << "0\n";
     else {
       FOR(i, 0, n) if (a[i][c] == 'B') can_in_one = true;
       FOR(i, 0, m) if (a[r][i] == 'B') can_in_one = true;
 
-      if (can_in_one) cout << "1\n";
-      else cout << "2\n";
+      if (can_in_one)
+        cout << "1\n";
+      else
+        cout << "2\n";
     }
   }
 
   return 0;
 }
-

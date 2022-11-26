@@ -1,22 +1,23 @@
-#include <cstdio>
 #include <algorithm>
+#include <cstdio>
 #include <vector>
 using namespace std;
 int aux;
 
 int main() {
-  int t; aux=scanf("%d",&t); 
+  int t;
+  aux = scanf("%d", &t);
   while (t--) {
     vector<int> b(7);
-    for (int i=0; i<7; i++) aux=scanf("%d",&b[i]);
+    for (int i = 0; i < 7; i++) aux = scanf("%d", &b[i]);
 
     bool finish = false;
 
-    for (int i=0; i<7; i++) {
+    for (int i = 0; i < 7; i++) {
       if (finish) break;
-      for (int j=0; j<7; j++) {
+      for (int j = 0; j < 7; j++) {
         if (finish) break;
-        for (int z=0; z<7; z++) {
+        for (int z = 0; z < 7; z++) {
           if (finish) break;
           vector<int> a;
           a.push_back(b[i]);
@@ -38,4 +39,3 @@ int main() {
 
   return 0;
 }
-

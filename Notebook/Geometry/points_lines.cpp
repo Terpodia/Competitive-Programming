@@ -153,4 +153,3 @@ int main() {
   test_vec();
   return 0;
 }
-

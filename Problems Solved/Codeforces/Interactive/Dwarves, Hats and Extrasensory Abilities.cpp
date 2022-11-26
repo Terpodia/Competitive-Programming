@@ -1,14 +1,14 @@
 #include <bits/stdc++.h>
- 
+
 #include <ext/pb_ds/assoc_container.hpp>
 #include <ext/pb_ds/tree_policy.hpp>
- 
+
 using namespace __gnu_pbds;
 using namespace std;
 template <typename T>
 using ordered_set =
     tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
- 
+
 void _scan(int &x) { scanf("%d", &x); }
 void _scan(long long &x) { scanf("%lld", &x); }
 void _scan(double &x) { scanf("%lf", &x); }
@@ -21,7 +21,7 @@ void _scan(vector<T> &v) {
 }
 void scan() {}
 template <typename T, typename... U>
-void scan(T &head, U &... tail) {
+void scan(T &head, U &...tail) {
   _scan(head);
   scan(tail...);
 }
@@ -29,16 +29,16 @@ void set_IO() {
   cin.tie(0)->sync_with_stdio(0);
   cout << fixed << setprecision(15);
 }
- 
+
 void _dbg(istream_iterator<string> it) {}
 template <typename T, typename... U>
-void _dbg(istream_iterator<string> it, T &head, U &... tail) {
+void _dbg(istream_iterator<string> it, T &head, U &...tail) {
   cout << *it << "=" << head << " ";
   _dbg(++it, tail...);
 }
- 
+
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
- 
+
 #define sz(x) (int)x.size()
 #define all(x) x.begin(), x.end()
 #define pb push_back
@@ -55,34 +55,36 @@ mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
     istream_iterator<string> _it(_ss);       \
     _dbg(_it, args);                         \
   }
- 
+
 typedef __uint128_t u128;
 
 const int INF = 1e9;
 
 int main() {
   int n;
-  cin>>n;
- 
+  cin >> n;
+
   string color;
   cout << "0 0" << endl;
   cin >> color;
- 
+
   int l = 1, r = INF;
- 
-  rep(i, 1, n){
+
+  rep(i, 1, n) {
     int mid = l + (r - l + 1) / 2;
     cout << mid << " 0" << endl;
     string s;
     cin >> s;
- 
-    if(s == color) l = mid;
-    else r = mid - 1;
+
+    if (s == color)
+      l = mid;
+    else
+      r = mid - 1;
   }
- 
+
   int mid = l + (r - l + 1) / 2;
-  printf("%d %d %d %d", mid, 1, mid-1, 3);
- 
+  printf("%d %d %d %d", mid, 1, mid - 1, 3);
+
   return 0;
 }
 // "Si puedes imaginarlo puedes programarlo" Alejandro Taboada

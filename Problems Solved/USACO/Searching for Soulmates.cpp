@@ -1,5 +1,5 @@
-#include <cstdio>
 #include <algorithm>
+#include <cstdio>
 using namespace std;
 
 typedef long long ll;
@@ -9,9 +9,10 @@ const int INF = 1e9;
 ll a, b;
 
 ll lastOne(ll x) {
-  for (ll i=60; i>=0; i--) if (x & (1LL << i)) {
-    return i;
-  }
+  for (ll i = 60; i >= 0; i--)
+    if (x & (1LL << i)) {
+      return i;
+    }
   return 0;
 }
 
@@ -29,22 +30,22 @@ bool isSuffix(ll x, ll y) {
 
 void solve() {
   int ans = INF;
-  for (int d=0; d<=70; d++) 
-    for (int s=0; s<=70; s++) {
+  for (int d = 0; d <= 70; d++)
+    for (int s = 0; s <= 70; s++) {
       ll c = a;
       int acc = 0;
-      for (int i=0; i<d; i++) {
+      for (int i = 0; i < d; i++) {
         if (c % 2 != 0) c++, acc++;
         c /= 2;
         acc++;
       }
-      for (int i=0; i<s; i++) acc++, c++;
+      for (int i = 0; i < s; i++) acc++, c++;
 
       if (!isSuffix(b, c)) continue;
 
-      for (ll i=lastOne(b)-lastOne(c)-1; i>=0; i--) 
+      for (ll i = lastOne(b) - lastOne(c) - 1; i >= 0; i--)
         acc += (b & (1LL << i)) ? 2 : 1;
-      
+
       ans = min(acc, ans);
     }
 
@@ -53,11 +54,10 @@ void solve() {
 
 int main() {
   int tt;
-  scanf("%d",&tt);
+  scanf("%d", &tt);
   while (tt--) {
-    scanf("%lld%lld",&a,&b); 
+    scanf("%lld%lld", &a, &b);
     solve();
   }
   return 0;
 }
-

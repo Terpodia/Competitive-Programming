@@ -21,7 +21,7 @@ void _scan(vector<T> &v) {
 }
 void scan() {}
 template <typename T, typename... U>
-void scan(T &head, U &... tail) {
+void scan(T &head, U &...tail) {
   _scan(head);
   scan(tail...);
 }
@@ -32,7 +32,7 @@ void set_IO() {
 
 void _dbg(istream_iterator<string> it) {}
 template <typename T, typename... U>
-void _dbg(istream_iterator<string> it, T &head, U &... tail) {
+void _dbg(istream_iterator<string> it, T &head, U &...tail) {
   cout << *it << "=" << head << " ";
   _dbg(++it, tail...);
 }
@@ -63,20 +63,20 @@ int main() {
   cin >> n >> s >> m;
   t = vector<string>(m);
   rep(i, 0, m) cin >> t[i];
-  
+
   map<int, int> mp[26];
   vector<int> cnt(26, 0);
   rep(i, 0, n) {
-    cnt[s[i]-'a']++;
-    mp[s[i]-'a'][cnt[s[i]-'a']] = i;
+    cnt[s[i] - 'a']++;
+    mp[s[i] - 'a'][cnt[s[i] - 'a']] = i;
   }
 
   rep(i, 0, m) {
     int ans = -1;
     cnt = vector<int>(26, 0);
     for (char c : t[i]) {
-      cnt[c-'a']++;
-      ans = max(ans, mp[c-'a'][cnt[c-'a']]);
+      cnt[c - 'a']++;
+      ans = max(ans, mp[c - 'a'][cnt[c - 'a']]);
     }
     ans++;
     cout << ans << "\n";

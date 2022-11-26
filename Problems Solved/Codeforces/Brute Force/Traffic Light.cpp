@@ -21,7 +21,7 @@ void _scan(vector<T> &v) {
 }
 void scan() {}
 template <typename T, typename... U>
-void scan(T &head, U &... tail) {
+void scan(T &head, U &...tail) {
   _scan(head);
   scan(tail...);
 }
@@ -32,7 +32,7 @@ void set_IO() {
 
 void _dbg(istream_iterator<string> it) {}
 template <typename T, typename... U>
-void _dbg(istream_iterator<string> it, T &head, U &... tail) {
+void _dbg(istream_iterator<string> it, T &head, U &...tail) {
   cout << *it << "=" << head << " ";
   _dbg(++it, tail...);
 }
@@ -61,23 +61,25 @@ typedef __uint128_t u128;
 int main() {
   set_IO();
   int tt;
-  cin>>tt;
-  while(tt--){
+  cin >> tt;
+  while (tt--) {
     int n;
     char c;
     string s;
     cin >> n >> c >> s;
 
     vector<int> g;
-    rep(i,0,n) if(s[i]=='g') g.pb(i);
+    rep(i, 0, n) if (s[i] == 'g') g.pb(i);
 
-    if(c=='g') cout<<"0\n";
-    else{
-      int ans=0;
-      rep(i,0,n) if(s[i] == c) {
-        auto it = upper_bound(all(g), i); 
-        if(it != g.end()) ans = max(ans, abs(*it - i));
-        else{
+    if (c == 'g')
+      cout << "0\n";
+    else {
+      int ans = 0;
+      rep(i, 0, n) if (s[i] == c) {
+        auto it = upper_bound(all(g), i);
+        if (it != g.end())
+          ans = max(ans, abs(*it - i));
+        else {
           ans = max(ans, n - i + g[0]);
         }
       }

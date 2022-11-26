@@ -21,7 +21,7 @@ void _scan(vector<T> &v) {
 }
 void scan() {}
 template <typename T, typename... U>
-void scan(T &head, U &... tail) {
+void scan(T &head, U &...tail) {
   _scan(head);
   scan(tail...);
 }
@@ -32,7 +32,7 @@ void set_IO() {
 
 void _dbg(istream_iterator<string> it) {}
 template <typename T, typename... U>
-void _dbg(istream_iterator<string> it, T &head, U &... tail) {
+void _dbg(istream_iterator<string> it, T &head, U &...tail) {
   cout << *it << "=" << head << " ";
   _dbg(++it, tail...);
 }
@@ -65,39 +65,41 @@ const ld INF = 1e18;
 int n;
 ld x[MAXN], t[MAXN];
 
-bool can(ld k){
+bool can(ld k) {
   pair<ld, ld> s[n];
-  rep(i,0,n) s[i].fst=x[i]-k+t[i], s[i].snd=x[i]+k-t[i];
+  rep(i, 0, n) s[i].fst = x[i] - k + t[i], s[i].snd = x[i] + k - t[i];
 
   ld l = s[0].fst, r = s[0].snd;
 
-  rep(i, 1, n){
-    if(s[i].fst > r || s[i].snd < l) return false;
+  rep(i, 1, n) {
+    if (s[i].fst > r || s[i].snd < l) return false;
     l = max(l, s[i].fst);
     r = min(r, s[i].snd);
   }
   return true;
 }
-ld pos(ld k){
+ld pos(ld k) {
   pair<ld, ld> s[n];
-  rep(i,0,n) s[i].fst=x[i]-k+t[i], s[i].snd=x[i]+k-t[i];
+  rep(i, 0, n) s[i].fst = x[i] - k + t[i], s[i].snd = x[i] + k - t[i];
 
   ld l = s[0].fst, r = s[0].snd;
 
-  rep(i, 1, n){
-    if(s[i].fst > r || s[i].snd < l) return false;
+  rep(i, 1, n) {
+    if (s[i].fst > r || s[i].snd < l) return false;
     l = max(l, s[i].fst);
     r = min(r, s[i].snd);
   }
   return r;
 }
 
-ld bs(){
-  ld l = *max_element(t,t+n), r = INF;
-  rep(i, 0, 100){
+ld bs() {
+  ld l = *max_element(t, t + n), r = INF;
+  rep(i, 0, 100) {
     ld mid = (l + r) / 2;
-    if(can(mid)) r = mid;
-    else l = mid;
+    if (can(mid))
+      r = mid;
+    else
+      l = mid;
   }
   return r;
 }
@@ -105,10 +107,10 @@ ld bs(){
 int main() {
   int tt;
   scan(tt);
-  while(tt--){
+  while (tt--) {
     scan(n);
-    rep(i,0,n) scan(x[i]);
-    rep(i,0,n) scan(t[i]);
+    rep(i, 0, n) scan(x[i]);
+    rep(i, 0, n) scan(t[i]);
     printf("%.7Lf\n", pos(bs()));
   }
   return 0;

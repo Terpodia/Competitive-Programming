@@ -53,13 +53,14 @@ int n, e[MAXN];
 vector<ii> g[MAXN];
 bool can;
 
-void dfs(int u, int f=0, int p=-1) {
+void dfs(int u, int f = 0, int p = -1) {
   if (sz(g[u]) > 2) can = false;
-  for (auto& [v, i] : g[u]) if (v != p) {
-    e[i] = x[f]; 
-    f = !f;
-    dfs(v, f, u);
-  }
+  for (auto &[v, i] : g[u])
+    if (v != p) {
+      e[i] = x[f];
+      f = !f;
+      dfs(v, f, u);
+    }
 }
 
 int main() {
@@ -85,4 +86,3 @@ int main() {
   }
   return 0;
 }
-

@@ -1,5 +1,5 @@
-#include <iostream>
 #include <algorithm>
+#include <iostream>
 using namespace std;
 
 int aux;
@@ -11,10 +11,8 @@ int main() {
     int a, b, c, m;
     aux = scanf("%d%d%d%d", &a, &b, &c, &m);
 
-    if (c < b)
-      swap(c, b);
-    if (c < a)
-      swap(c, a);
+    if (c < b) swap(c, b);
+    if (c < a) swap(c, a);
 
     int l = max(c - 1 - (a + b), 0), r = a + b + c - 3;
 

@@ -10,8 +10,8 @@ int main() {
     int n, m;
     scanf("%d%d", &n, &m);
     vector<int> ans;
-    for (int i=0; i<n; i++) 
-      for (int j=0; j<m; j++) {
+    for (int i = 0; i < n; i++)
+      for (int j = 0; j < m; j++) {
         int v = max(i + j, n - i + m - j - 2);
         v = max(v, max(i + m - j - 1, n - i - 1 + j));
         ans.push_back(v);
@@ -22,4 +22,3 @@ int main() {
   }
   return 0;
 }
-

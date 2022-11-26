@@ -21,7 +21,7 @@ void _scan(vector<T> &v) {
 }
 void scan() {}
 template <typename T, typename... U>
-void scan(T &head, U &... tail) {
+void scan(T &head, U &...tail) {
   _scan(head);
   scan(tail...);
 }
@@ -32,7 +32,7 @@ void set_IO() {
 
 void _dbg(istream_iterator<string> it) {}
 template <typename T, typename... U>
-void _dbg(istream_iterator<string> it, T &head, U &... tail) {
+void _dbg(istream_iterator<string> it, T &head, U &...tail) {
   cout << *it << "=" << head << " ";
   _dbg(++it, tail...);
 }
@@ -61,30 +61,32 @@ typedef __uint128_t u128;
 int main() {
   int tt;
   scan(tt);
-  while(tt--){
+  while (tt--) {
     int n;
     scan(n);
     int a[n];
-    rep(i,0,n) scan(a[i]);
+    rep(i, 0, n) scan(a[i]);
 
-    int cnt=0;
+    int cnt = 0;
     vector<int> add;
-    rep(i,0,n){
+    rep(i, 0, n) {
       int x = a[i];
-      while(x % 2 == 0) cnt++, x /= 2;
-      x = i+1;
+      while (x % 2 == 0) cnt++, x /= 2;
+      x = i + 1;
       int b = 0;
-      while(x % 2 == 0) b++, x /= 2;
+      while (x % 2 == 0) b++, x /= 2;
       add.pb(b);
     }
     sort(all(add), greater<int>());
 
-    int ans=0;
-    rep(i,0,n){
-      if(cnt < n) cnt += add[i], ans++;
+    int ans = 0;
+    rep(i, 0, n) {
+      if (cnt < n) cnt += add[i], ans++;
     }
-    if(cnt < n) printf("-1\n");
-    else printf("%d\n", ans);
+    if (cnt < n)
+      printf("-1\n");
+    else
+      printf("%d\n", ans);
   }
   return 0;
 }

@@ -4,31 +4,32 @@ using namespace std;
 using ll = long long;
 
 const int MAXN = 2e5;
-int n; ll x;
+int n;
+ll x;
 ll a[MAXN];
 
-ll solve(){
-    ll ans = 0;
-    map<ll, ll> mp;
-    
-    ll psum = 0;
+ll solve() {
+  ll ans = 0;
+  map<ll, ll> mp;
 
-    for(int i=0; i<n; i++){
-        psum += a[i];
-        if(mp.find(psum-x) != mp.end()) ans += mp[psum - x];
-        if(psum == x) ans++;
+  ll psum = 0;
 
-        mp[psum]++;
-    }
+  for (int i = 0; i < n; i++) {
+    psum += a[i];
+    if (mp.find(psum - x) != mp.end()) ans += mp[psum - x];
+    if (psum == x) ans++;
 
-    return ans;
+    mp[psum]++;
+  }
+
+  return ans;
 }
 
-int main(){
-    scanf("%d%lld",&n,&x); 
-    for(int i=0; i<n; i++) scanf("%lld",a+i);
+int main() {
+  scanf("%d%lld", &n, &x);
+  for (int i = 0; i < n; i++) scanf("%lld", a + i);
 
-    printf("%lld\n", solve());
+  printf("%lld\n", solve());
 
-    return 0;
+  return 0;
 }

@@ -21,7 +21,7 @@ void _scan(vector<T> &v) {
 }
 void scan() {}
 template <typename T, typename... U>
-void scan(T &head, U &... tail) {
+void scan(T &head, U &...tail) {
   _scan(head);
   scan(tail...);
 }
@@ -32,7 +32,7 @@ void set_IO() {
 
 void _dbg(istream_iterator<string> it) {}
 template <typename T, typename... U>
-void _dbg(istream_iterator<string> it, T &head, U &... tail) {
+void _dbg(istream_iterator<string> it, T &head, U &...tail) {
   cout << *it << "=" << head << " ";
   _dbg(++it, tail...);
 }
@@ -61,23 +61,23 @@ typedef __uint128_t u128;
 int main() {
   set_IO();
   int tt;
-  cin>>tt;
-  while(tt--){
-    char a[8][8]; 
-    rep(i,0,8) rep(j,0,8) cin>>a[i][j];
-    int ans=0;
+  cin >> tt;
+  while (tt--) {
+    char a[8][8];
+    rep(i, 0, 8) rep(j, 0, 8) cin >> a[i][j];
+    int ans = 0;
 
-    rep(i,0,8){
-      if(ans==1) break;
-      bool can=true;
-      rep(j,0,8){
-        can &= a[i][j]=='R';
-      }
-      if(can) ans=1;
+    rep(i, 0, 8) {
+      if (ans == 1) break;
+      bool can = true;
+      rep(j, 0, 8) { can &= a[i][j] == 'R'; }
+      if (can) ans = 1;
     }
 
-    if(ans==0) cout<<"B\n";
-    else cout<<"R\n";
+    if (ans == 0)
+      cout << "B\n";
+    else
+      cout << "R\n";
   }
   return 0;
 }

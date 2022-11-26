@@ -21,7 +21,7 @@ void _scan(vector<T> &v) {
 }
 void scan() {}
 template <typename T, typename... U>
-void scan(T &head, U &... tail) {
+void scan(T &head, U &...tail) {
   _scan(head);
   scan(tail...);
 }
@@ -32,7 +32,7 @@ void set_IO() {
 
 void _dbg(istream_iterator<string> it) {}
 template <typename T, typename... U>
-void _dbg(istream_iterator<string> it, T &head, U &... tail) {
+void _dbg(istream_iterator<string> it, T &head, U &...tail) {
   cout << *it << "=" << head << " ";
   _dbg(++it, tail...);
 }
@@ -55,7 +55,7 @@ mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 #define s second
 
 typedef __uint128_t u128;
-typedef pair<int,int> ii;
+typedef pair<int, int> ii;
 
 int n, m;
 vector<ii> v[2];
@@ -63,56 +63,58 @@ vector<ii> v[2];
 void solve() {
   int a[n];
   rep(i, 0, n) a[i] = n - i;
-  for (auto& [l,r] : v[1]) {
+  for (auto &[l, r] : v[1]) {
     if (l < 0 || r < 0) continue;
-    sort(a+l, a+r+1);
+    sort(a + l, a + r + 1);
   }
   puts("YES");
-  rep(i, 0, n) printf("%d%c", a[i], " \n"[i==n-1]);
+  rep(i, 0, n) printf("%d%c", a[i], " \n"[i == n - 1]);
 }
 
 void process() {
   sort(v[1].begin(), v[1].end());
-  int k=0; ii curr = {-1,-1};
+  int k = 0;
+  ii curr = {-1, -1};
   vector<ii> add;
   while (k < sz(v[1])) {
     if (curr.s < v[1][k].f) {
-      add.push_back(curr); 
+      add.push_back(curr);
       curr = v[1][k];
     }
     curr.s = max(curr.s, v[1][k].s);
-    v[1][k] = {-1,-1};
+    v[1][k] = {-1, -1};
     k++;
   }
   add.push_back(curr);
-  rep(i,0,sz(add)) v[1].push_back(add[i]);
+  rep(i, 0, sz(add)) v[1].push_back(add[i]);
 }
 
 bool check() {
   rep(i, 0, sz(v[1])) {
     if (v[1][i].f < 0 || v[1][i].s < 0) continue;
     rep(j, 0, sz(v[0])) {
-      if (v[0][j].f >= v[1][i].f && v[0][j].s <= v[1][i].s)
-        return false;
+      if (v[0][j].f >= v[1][i].f && v[0][j].s <= v[1][i].s) return false;
     }
   }
   return true;
 }
 
 int main() {
-  scan(n, m); 
+  scan(n, m);
   rep(i, 0, m) {
     int t;
     scan(t);
     int l, r;
     scan(l, r);
-    v[t].push_back({l-1,r-1});
+    v[t].push_back({l - 1, r - 1});
   }
 
   process();
 
-  if (!check()) puts("NO");
-  else solve();
+  if (!check())
+    puts("NO");
+  else
+    solve();
 
   return 0;
 }

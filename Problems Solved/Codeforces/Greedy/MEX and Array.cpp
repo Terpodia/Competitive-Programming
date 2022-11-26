@@ -62,15 +62,12 @@ int main() {
     cin >> n;
     int a[n];
     rep(i, 0, n) {
-      cin >> a[i]; 
+      cin >> a[i];
       a[i] = (a[i] == 0) ? 2 : 1;
     }
-    int ans=0;
-    rep(i, 0, n) {
-      ans += a[i] * (n - i) * (i + 1);
-    }
+    int ans = 0;
+    rep(i, 0, n) { ans += a[i] * (n - i) * (i + 1); }
     cout << ans << "\n";
   }
   return 📈;
 }
-

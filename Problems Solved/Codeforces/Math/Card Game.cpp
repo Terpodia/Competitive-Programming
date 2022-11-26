@@ -21,7 +21,7 @@ void _scan(vector<T> &v) {
 }
 void scan() {}
 template <typename T, typename... U>
-void scan(T &head, U &... tail) {
+void scan(T &head, U &...tail) {
   _scan(head);
   scan(tail...);
 }
@@ -32,7 +32,7 @@ void set_IO() {
 
 void _dbg(istream_iterator<string> it) {}
 template <typename T, typename... U>
-void _dbg(istream_iterator<string> it, T &head, U &... tail) {
+void _dbg(istream_iterator<string> it, T &head, U &...tail) {
   cout << *it << "=" << head << " ";
   _dbg(++it, tail...);
 }
@@ -63,28 +63,30 @@ const ll MOD = 998244353;
 
 ll comb[100][100];
 
-int main(){
-  rep(i,0,100) comb[i][0] = 1;
-  rep(i,0,100) comb[i][i] = 1;
-  rep(i,1,100) rep(j,i-1,-1){
-    comb[i][j] = (comb[i-1][j] + comb[i-1][j-1]) % MOD;
+int main() {
+  rep(i, 0, 100) comb[i][0] = 1;
+  rep(i, 0, 100) comb[i][i] = 1;
+  rep(i, 1, 100) rep(j, i - 1, -1) {
+    comb[i][j] = (comb[i - 1][j] + comb[i - 1][j - 1]) % MOD;
   }
   int tt;
   scan(tt);
-  while(tt--){
+  while (tt--) {
     int n;
     scan(n);
-    ll alex=0;
-    int curr = n-1, flag=0, m=n, k=n/2;
-    
-    rep(i,n,0){
+    ll alex = 0;
+    int curr = n - 1, flag = 0, m = n, k = n / 2;
+
+    rep(i, n, 0) {
       m--;
-      if(k == 0) break;
-      if(i == curr) curr -= (flag==0)?1:3, k--, flag=1-flag;
-      else alex = (alex + comb[m][k-1]) % MOD;
+      if (k == 0) break;
+      if (i == curr)
+        curr -= (flag == 0) ? 1 : 3, k--, flag = 1 - flag;
+      else
+        alex = (alex + comb[m][k - 1]) % MOD;
     }
-    printf("%lld %lld 1\n", alex, (comb[n][n/2]-alex-1+MOD)%MOD);
+    printf("%lld %lld 1\n", alex, (comb[n][n / 2] - alex - 1 + MOD) % MOD);
   }
   return 0;
 }
-// "Si puedes imaginarlo puedes programarlo" Alejandro Taboada 
+// "Si puedes imaginarlo puedes programarlo" Alejandro Taboada

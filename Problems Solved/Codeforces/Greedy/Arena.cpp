@@ -1,36 +1,40 @@
-#include <iostream>
 #include <algorithm>
+#include <iostream>
 using namespace std;
 
-void fastIO(){
-    ios::sync_with_stdio(false);
-    cout.tie(nullptr);
-    cin.tie(nullptr);
+void fastIO() {
+  ios::sync_with_stdio(false);
+  cout.tie(nullptr);
+  cin.tie(nullptr);
 }
 
-int main(){
-    fastIO();
-    int t; cin >> t;
+int main() {
+  fastIO();
+  int t;
+  cin >> t;
 
-    while(t--){
-        int n; 
-        cin >> n; int a[n];
-        for(int i=0; i<n; i++) cin >> a[i];
-        sort(a, a+n);
-        
-        int ans = 0;
+  while (t--) {
+    int n;
+    cin >> n;
+    int a[n];
+    for (int i = 0; i < n; i++) cin >> a[i];
+    sort(a, a + n);
 
-        for(int i=0; i<n; i++){
-            int level = a[i];
-            bool f = false;
-            for(int j = 0; j < n; j++){
-                if(a[j] < level){f = true; break;}
-            }
-            if(f) ans++;
+    int ans = 0;
+
+    for (int i = 0; i < n; i++) {
+      int level = a[i];
+      bool f = false;
+      for (int j = 0; j < n; j++) {
+        if (a[j] < level) {
+          f = true;
+          break;
         }
-        cout << ans << "\n";
+      }
+      if (f) ans++;
     }
+    cout << ans << "\n";
+  }
 
-
-    return 0;
+  return 0;
 }

@@ -21,7 +21,7 @@ void _scan(vector<T> &v) {
 }
 void scan() {}
 template <typename T, typename... U>
-void scan(T &head, U &... tail) {
+void scan(T &head, U &...tail) {
   _scan(head);
   scan(tail...);
 }
@@ -32,7 +32,7 @@ void set_IO() {
 
 void _dbg(istream_iterator<string> it) {}
 template <typename T, typename... U>
-void _dbg(istream_iterator<string> it, T &head, U &... tail) {
+void _dbg(istream_iterator<string> it, T &head, U &...tail) {
   cout << *it << "=" << head << " ";
   _dbg(++it, tail...);
 }
@@ -61,23 +61,23 @@ typedef __uint128_t u128;
 int main() {
   int tt;
   scan(tt);
-  while(tt--){
+  while (tt--) {
     int n;
     scan(n);
     int a[n];
-    rep(i,0,n) scan(a[i]);
+    rep(i, 0, n) scan(a[i]);
 
-    int ans=0;
-    
-    rep(i,0,10) rep(j,0,10) rep(k,0,10) rep(w,0,10){
+    int ans = 0;
+
+    rep(i, 0, 10) rep(j, 0, 10) rep(k, 0, 10) rep(w, 0, 10) {
       bool valid = true;
-      vector<int> cnt(10,0);
+      vector<int> cnt(10, 0);
       cnt[i]++, cnt[j]++, cnt[k]++, cnt[w]++;
 
-      rep(z,0,10) valid &= (cnt[z] == 0 || cnt[z] == 2);
-      rep(z,0,n) valid &= (i != a[z] && j != a[z] && k != a[z] && w != a[z]);
+      rep(z, 0, 10) valid &= (cnt[z] == 0 || cnt[z] == 2);
+      rep(z, 0, n) valid &= (i != a[z] && j != a[z] && k != a[z] && w != a[z]);
 
-      if(valid) ans++;
+      if (valid) ans++;
     }
 
     printf("%d\n", ans);

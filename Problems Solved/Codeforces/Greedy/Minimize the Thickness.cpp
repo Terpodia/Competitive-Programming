@@ -21,7 +21,7 @@ void _scan(vector<T> &v) {
 }
 void scan() {}
 template <typename T, typename... U>
-void scan(T &head, U &... tail) {
+void scan(T &head, U &...tail) {
   _scan(head);
   scan(tail...);
 }
@@ -32,7 +32,7 @@ void set_IO() {
 
 void _dbg(istream_iterator<string> it) {}
 template <typename T, typename... U>
-void _dbg(istream_iterator<string> it, T &head, U &... tail) {
+void _dbg(istream_iterator<string> it, T &head, U &...tail) {
   cout << *it << "=" << head << " ";
   _dbg(++it, tail...);
 }
@@ -62,16 +62,16 @@ typedef long long ll;
 int n;
 ll a[3000];
 
-int solve(int k, ll cnt){
-  int j=0, ret = k;
-  ll s=0;
+int solve(int k, ll cnt) {
+  int j = 0, ret = k;
+  ll s = 0;
 
-  rep(i,k,n){
+  rep(i, k, n) {
     s += a[i], j++;
-    if(s > cnt) return -1;
-    if(s == cnt) ret = max(ret,j), j=0, s=0;
+    if (s > cnt) return -1;
+    if (s == cnt) ret = max(ret, j), j = 0, s = 0;
   }
-  if(s != 0) return -1;
+  if (s != 0) return -1;
 
   return ret;
 }
@@ -79,17 +79,19 @@ int solve(int k, ll cnt){
 int main() {
   int tt;
   scan(tt);
-  while(tt--){
+  while (tt--) {
     scan(n);
-    rep(i,0,n) scan(a[i]);
+    rep(i, 0, n) scan(a[i]);
 
     int ans = n;
-    ll acc=0;
+    ll acc = 0;
 
-    rep(i,0,n-1){
+    rep(i, 0, n - 1) {
       acc += a[i];
-      int res = solve(i+1, acc); 
-      if(res != -1){ans = min(ans, res);}
+      int res = solve(i + 1, acc);
+      if (res != -1) {
+        ans = min(ans, res);
+      }
     }
     printf("%d\n", ans);
   }

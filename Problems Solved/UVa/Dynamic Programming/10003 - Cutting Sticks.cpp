@@ -12,7 +12,7 @@ int solve(int i, int j) {
 
   ret = INF;
   int cnt = c[j] - c[i];
-  for (int k=i+1; k<j; k++) {
+  for (int k = i + 1; k < j; k++) {
     ret = min(ret, cnt + solve(i, k) + solve(k, j));
   }
   return ret;
@@ -23,11 +23,10 @@ int main() {
   while (cin >> l && l > 0) {
     cin >> n;
     c[0] = 0;
-    for (int i=1; i<=n; i++) cin >> c[i];
-    c[n+1] = l;
+    for (int i = 1; i <= n; i++) cin >> c[i];
+    c[n + 1] = l;
     memset(dp, -1, sizeof(dp));
-    cout << "The minimum cutting is " << solve(0, n+1) << ".\n";
+    cout << "The minimum cutting is " << solve(0, n + 1) << ".\n";
   }
   return 0;
 }
-

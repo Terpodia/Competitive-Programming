@@ -32,4 +32,3 @@ int main() {
   printf("%lld\n", solve());
   return 0;
 }
-

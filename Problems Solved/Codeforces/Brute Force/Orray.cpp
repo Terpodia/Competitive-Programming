@@ -21,7 +21,7 @@ void _scan(vector<T> &v) {
 }
 void scan() {}
 template <typename T, typename... U>
-void scan(T &head, U &... tail) {
+void scan(T &head, U &...tail) {
   _scan(head);
   scan(tail...);
 }
@@ -32,7 +32,7 @@ void set_IO() {
 
 void _dbg(istream_iterator<string> it) {}
 template <typename T, typename... U>
-void _dbg(istream_iterator<string> it, T &head, U &... tail) {
+void _dbg(istream_iterator<string> it, T &head, U &...tail) {
   cout << *it << "=" << head << " ";
   _dbg(++it, tail...);
 }
@@ -62,51 +62,49 @@ const int MAXN = 2e5 + 20;
 
 int n, a[MAXN];
 
-void solve(){
+void solve() {
   vector<int> ans;
   int curr = a[0];
   ans.pb(a[0]);
-  a[0]=-1;
+  a[0] = -1;
 
-  while(sz(ans) < n){
+  while (sz(ans) < n) {
     vector<int> pos;
 
-    rep(i,29,-1){
-      if(curr & (1<<i)) continue;
+    rep(i, 29, -1) {
+      if (curr & (1 << i)) continue;
 
-      if(pos.empty()){
-        rep(j,0,n) if(a[j] != -1){
-          if(a[j] & (1<<i)) pos.pb(j);
+      if (pos.empty()) {
+        rep(j, 0, n) if (a[j] != -1) {
+          if (a[j] & (1 << i)) pos.pb(j);
         }
-      }
-      else{
-        vector<int> aux; 
-        for(auto j : pos) if(a[j] != -1){
-          if(a[j] & (1<<i)) aux.pb(j);
-        } 
-        if(!aux.empty()) pos = aux;
+      } else {
+        vector<int> aux;
+        for (auto j : pos)
+          if (a[j] != -1) {
+            if (a[j] & (1 << i)) aux.pb(j);
+          }
+        if (!aux.empty()) pos = aux;
       }
     }
 
-    if(!pos.empty()){
-      ans.pb(a[pos[0]]), curr |= a[pos[0]], a[pos[0]]=-1;
-    } 
-    else{
-      rep(i,0,n) if(a[i] != -1)
-        ans.pb(a[i]);
+    if (!pos.empty()) {
+      ans.pb(a[pos[0]]), curr |= a[pos[0]], a[pos[0]] = -1;
+    } else {
+      rep(i, 0, n) if (a[i] != -1) ans.pb(a[i]);
     }
   }
 
-  rep(i,0,n) printf("%d%c",ans[i]," \n"[i==n-1]);
+  rep(i, 0, n) printf("%d%c", ans[i], " \n"[i == n - 1]);
 }
 
 int main() {
   int tt;
   scan(tt);
-  while(tt--){
-    scan(n); 
-    rep(i,0,n) scan(a[i]);
-    sort(a,a+n,greater<int>());
+  while (tt--) {
+    scan(n);
+    rep(i, 0, n) scan(a[i]);
+    sort(a, a + n, greater<int>());
     solve();
   }
   return 0;

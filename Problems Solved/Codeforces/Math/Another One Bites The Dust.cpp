@@ -1,19 +1,19 @@
-#include <iostream>
 #include <algorithm>
+#include <iostream>
 using namespace std;
 
 typedef long long ll;
 
 int main() {
-    ll a,b,c; 
-    scanf("%lld%lld%lld",&a,&b,&c);
-    
-    ll ans = c*2;
-    if(a<b) swap(a,b);
-    a = min(a, b+1); 
-    ans += a + b;
+  ll a, b, c;
+  scanf("%lld%lld%lld", &a, &b, &c);
 
-    printf("%lld\n", ans);
+  ll ans = c * 2;
+  if (a < b) swap(a, b);
+  a = min(a, b + 1);
+  ans += a + b;
 
-    return 0;
+  printf("%lld\n", ans);
+
+  return 0;
 }

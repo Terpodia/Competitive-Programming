@@ -21,7 +21,7 @@ void _scan(vector<T> &v) {
 }
 void scan() {}
 template <typename T, typename... U>
-void scan(T &head, U &... tail) {
+void scan(T &head, U &...tail) {
   _scan(head);
   scan(tail...);
 }
@@ -32,7 +32,7 @@ void set_IO() {
 
 void _dbg(istream_iterator<string> it) {}
 template <typename T, typename... U>
-void _dbg(istream_iterator<string> it, T &head, U &... tail) {
+void _dbg(istream_iterator<string> it, T &head, U &...tail) {
   cout << *it << "=" << head << " ";
   _dbg(++it, tail...);
 }
@@ -64,21 +64,24 @@ int main() {
   string s;
   cin >> n >> s;
 
-  bool can=false;
+  bool can = false;
 
-  rep(i,0,9*n+1){
+  rep(i, 0, 9 * n + 1) {
     bool flag = true;
-    int cnt=-1, cnt2=0;
+    int cnt = -1, cnt2 = 0;
 
-    int j=0;
+    int j = 0;
 
-    while(j < n){
-      if(cnt == -1) cnt=0;
+    while (j < n) {
+      if (cnt == -1) cnt = 0;
       cnt += s[j] - '0';
-      while(j+1 < n && s[j+1] == '0' && i != 0) j++;
-      if(cnt >= i){
-        if(cnt > i){flag=false;break;}
-        cnt=-1;
+      while (j + 1 < n && s[j + 1] == '0' && i != 0) j++;
+      if (cnt >= i) {
+        if (cnt > i) {
+          flag = false;
+          break;
+        }
+        cnt = -1;
         cnt2++;
       }
       j++;
@@ -89,8 +92,10 @@ int main() {
     can |= flag;
   }
 
-  if(can) cout<<"YES\n";
-  else cout<<"NO\n";
+  if (can)
+    cout << "YES\n";
+  else
+    cout << "NO\n";
   return 0;
 }
 // "Si puedes imaginarlo puedes programarlo" Alejandro Taboada

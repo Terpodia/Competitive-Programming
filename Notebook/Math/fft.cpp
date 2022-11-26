@@ -73,4 +73,3 @@ int main() {
   rep(i, 0, n + m + 1) printf("%dx^%d%c", c[i], i, "+\n"[i == n + m]);
   return 0;
 }
-

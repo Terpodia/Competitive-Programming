@@ -21,7 +21,7 @@ void _scan(vector<T> &v) {
 }
 void scan() {}
 template <typename T, typename... U>
-void scan(T &head, U &... tail) {
+void scan(T &head, U &...tail) {
   _scan(head);
   scan(tail...);
 }
@@ -32,7 +32,7 @@ void set_IO() {
 
 void _dbg(istream_iterator<string> it) {}
 template <typename T, typename... U>
-void _dbg(istream_iterator<string> it, T &head, U &... tail) {
+void _dbg(istream_iterator<string> it, T &head, U &...tail) {
   cout << *it << "=" << head << " ";
   _dbg(++it, tail...);
 }
@@ -63,36 +63,36 @@ const int INF = 1e9;
 int main() {
   set_IO();
   int tt;
-  cin>>tt;
-  while(tt--){
+  cin >> tt;
+  while (tt--) {
     int n;
-    cin>>n;
+    cin >> n;
     string s;
-    cin>>s;
+    cin >> s;
     int a[n];
-    rep(i,0,n) cin>>a[i];
+    rep(i, 0, n) cin >> a[i];
 
-    int ans=0, l=0, r;
+    int ans = 0, l = 0, r;
 
-    while(l < n && s[l] == '0') l++;
-    r=l;
-    while(l < n){
-      int acc=a[r], lo = a[r];
+    while (l < n && s[l] == '0') l++;
+    r = l;
+    while (l < n) {
+      int acc = a[r], lo = a[r];
 
-      while(r+1 < n && s[r+1] == '1') 
-        acc += a[r+1], lo = min(lo, a[++r]);
+      while (r + 1 < n && s[r + 1] == '1')
+        acc += a[r + 1], lo = min(lo, a[++r]);
 
-      if(l-1 > -1){
-        if(lo < a[l-1]) acc -= lo, acc += a[l-1];
+      if (l - 1 > -1) {
+        if (lo < a[l - 1]) acc -= lo, acc += a[l - 1];
       }
       ans += acc;
 
-      l = r+1;
-      while(l < n && s[l] == '0') l++;
+      l = r + 1;
+      while (l < n && s[l] == '0') l++;
       r = l;
     }
 
-    cout<<ans<<"\n";
+    cout << ans << "\n";
   }
   return 0;
 }

@@ -118,4 +118,3 @@ int main() {
   for (auto [p, e] : factors) cout << p << "^" << e << "\n";
   return 0;
 }
-

@@ -70,4 +70,3 @@ int main() {
   }
   return 📈;
 }
-

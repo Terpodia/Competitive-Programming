@@ -21,7 +21,7 @@ void _scan(vector<T> &v) {
 }
 void scan() {}
 template <typename T, typename... U>
-void scan(T &head, U &... tail) {
+void scan(T &head, U &...tail) {
   _scan(head);
   scan(tail...);
 }
@@ -32,7 +32,7 @@ void set_IO() {
 
 void _dbg(istream_iterator<string> it) {}
 template <typename T, typename... U>
-void _dbg(istream_iterator<string> it, T &head, U &... tail) {
+void _dbg(istream_iterator<string> it, T &head, U &...tail) {
   cout << *it << "=" << head << " ";
   _dbg(++it, tail...);
 }
@@ -66,37 +66,39 @@ int p[MAXN];
 int ans;
 bool can = true;
 
-void dfs(int u, int h=0){
-  if(h==n) return;
+void dfs(int u, int h = 0) {
+  if (h == n) return;
 
-  int k = 1<<(n-h);
+  int k = 1 << (n - h);
 
-  dfs(u, h+1); 
-  dfs(u+k/2, h+1);
+  dfs(u, h + 1);
+  dfs(u + k / 2, h + 1);
 
-  bool check=false;
-  if(p[u] > p[u+k/2]) check=true;
+  bool check = false;
+  if (p[u] > p[u + k / 2]) check = true;
 
-  if(check){
+  if (check) {
     ans++;
-    rep(i,u,u+k/2) swap(p[i], p[i+k/2]);
+    rep(i, u, u + k / 2) swap(p[i], p[i + k / 2]);
   }
-  rep(i,u,u+k-1) can &= p[i] < p[i+1];
+  rep(i, u, u + k - 1) can &= p[i] < p[i + 1];
 }
 
 int main() {
   int tt;
   scan(tt);
-  while(tt--){
+  while (tt--) {
     scan(m);
-    rep(i,0,m) scan(p[i]);
+    rep(i, 0, m) scan(p[i]);
     n = (int)log2(m);
 
-    can=true, ans=0;
+    can = true, ans = 0;
     dfs(0, 0);
 
-    if(!can) puts("-1");
-    else printf("%d\n", ans);
+    if (!can)
+      puts("-1");
+    else
+      printf("%d\n", ans);
   }
   return 0;
 }

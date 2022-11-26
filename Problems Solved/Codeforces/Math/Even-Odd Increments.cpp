@@ -21,7 +21,7 @@ void _scan(vector<T> &v) {
 }
 void scan() {}
 template <typename T, typename... U>
-void scan(T &head, U &... tail) {
+void scan(T &head, U &...tail) {
   _scan(head);
   scan(tail...);
 }
@@ -32,7 +32,7 @@ void set_IO() {
 
 void _dbg(istream_iterator<string> it) {}
 template <typename T, typename... U>
-void _dbg(istream_iterator<string> it, T &head, U &... tail) {
+void _dbg(istream_iterator<string> it, T &head, U &...tail) {
   cout << *it << "=" << head << " ";
   _dbg(++it, tail...);
 }
@@ -62,26 +62,29 @@ typedef long long ll;
 int main() {
   int tt;
   scan(tt);
-  while(tt--){
+  while (tt--) {
     int n, q;
-    scan(n,q);
+    scan(n, q);
     ll a[n];
-    rep(i,0,n) scan(a[i]);
-    ll se=0, so=0, cnte=0, cnto=0;
-    rep(i,0,n) (a[i]%2==0) ? se+=a[i] : so+=a[i];
-    rep(i,0,n) (a[i]%2==0) ? cnte++ : cnto++;
+    rep(i, 0, n) scan(a[i]);
+    ll se = 0, so = 0, cnte = 0, cnto = 0;
+    rep(i, 0, n)(a[i] % 2 == 0) ? se += a[i] : so += a[i];
+    rep(i, 0, n)(a[i] % 2 == 0) ? cnte++ : cnto++;
 
-    while(q--){
+    while (q--) {
       int type;
       ll x;
-      scan(type,x);
-      if(type==0){
-        if(x%2==0) se += x*cnte;
-        else so += se + x*cnte, cnto += cnte, se=0, cnte=0;
-      }
-      else{
-        if(x%2==0) so += x*cnto;
-        else se += so + x*cnto, cnte += cnto, so=0, cnto=0;
+      scan(type, x);
+      if (type == 0) {
+        if (x % 2 == 0)
+          se += x * cnte;
+        else
+          so += se + x * cnte, cnto += cnte, se = 0, cnte = 0;
+      } else {
+        if (x % 2 == 0)
+          so += x * cnto;
+        else
+          se += so + x * cnto, cnte += cnto, so = 0, cnto = 0;
       }
       printf("%lld\n", se + so);
     }

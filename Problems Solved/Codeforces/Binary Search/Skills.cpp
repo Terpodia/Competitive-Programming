@@ -87,4 +87,3 @@ int main() {
   rep(i, 0, n) printf("%lld%c", a[i].fst, " \n"[i == n - 1]);
   return 0;
 }
-

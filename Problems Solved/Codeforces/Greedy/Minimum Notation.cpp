@@ -21,7 +21,7 @@ void _scan(vector<T> &v) {
 }
 void scan() {}
 template <typename T, typename... U>
-void scan(T &head, U &... tail) {
+void scan(T &head, U &...tail) {
   _scan(head);
   scan(tail...);
 }
@@ -32,7 +32,7 @@ void set_IO() {
 
 void _dbg(istream_iterator<string> it) {}
 template <typename T, typename... U>
-void _dbg(istream_iterator<string> it, T &head, U &... tail) {
+void _dbg(istream_iterator<string> it, T &head, U &...tail) {
   cout << *it << "=" << head << " ";
   _dbg(++it, tail...);
 }
@@ -61,25 +61,24 @@ typedef __uint128_t u128;
 int main() {
   set_IO();
   int tt;
-  cin>>tt;
-  while(tt--){
+  cin >> tt;
+  while (tt--) {
     string s;
-    cin>>s;
+    cin >> s;
     int n = sz(s);
-    char suff[n]; suff[n-1] = s[n-1];
-    rep(i, n-2, -1) suff[i] = min(suff[i+1], s[i]);
+    char suff[n];
+    suff[n - 1] = s[n - 1];
+    rep(i, n - 2, -1) suff[i] = min(suff[i + 1], s[i]);
 
     vector<int> cnt(10, 0);
 
-    rep(i, 0, n){
-      cnt[s[i]-'0']++;
-      if(s[i] > suff[i]) cnt[s[i]-'0']--, cnt[min(9,s[i]-'0'+1)]++;
+    rep(i, 0, n) {
+      cnt[s[i] - '0']++;
+      if (s[i] > suff[i]) cnt[s[i] - '0']--, cnt[min(9, s[i] - '0' + 1)]++;
     }
 
-    rep(i, 0, 10){
-      rep(j, 0, cnt[i]) cout<<i;
-    }
-    cout<<"\n";
+    rep(i, 0, 10) { rep(j, 0, cnt[i]) cout << i; }
+    cout << "\n";
   }
   return 0;
 }

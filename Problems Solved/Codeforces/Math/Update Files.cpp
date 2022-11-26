@@ -1,5 +1,5 @@
-#include <cstdio>
 #include <algorithm>
+#include <cstdio>
 using namespace std;
 int aux;
 
@@ -10,14 +10,18 @@ const ll INF = 2e9;
 ll n, k;
 
 int main() {
-  int t; aux=scanf("%d",&t);
+  int t;
+  aux = scanf("%d", &t);
   while (t--) {
-    aux=scanf("%lld%lld",&n,&k);
+    aux = scanf("%lld%lld", &n, &k);
 
-    ll ans=0;
-    ll j=0;
-    for (ll i=0; ; i++) {
-      if (((ll)1 << i) >= min(n, k)) { j = i; break; }
+    ll ans = 0;
+    ll j = 0;
+    for (ll i = 0;; i++) {
+      if (((ll)1 << i) >= min(n, k)) {
+        j = i;
+        break;
+      }
     }
 
     ans += j;
@@ -28,4 +32,3 @@ int main() {
 
   return 0;
 }
-

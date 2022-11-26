@@ -126,4 +126,3 @@ int main() {
   printf("%lld\n", *max_element(ans, ans + n));
   return 0;
 }
-

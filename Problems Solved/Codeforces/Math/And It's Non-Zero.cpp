@@ -1,5 +1,5 @@
-#include <cstdio>
 #include <algorithm>
+#include <cstdio>
 using namespace std;
 int aux;
 
@@ -17,16 +17,17 @@ int f(int b, int k) {
 }
 
 int main() {
-  int tc; aux=scanf("%d",&tc);
+  int tc;
+  aux = scanf("%d", &tc);
   while (tc--) {
-    int l, r; aux=scanf("%d%d",&l,&r);
-    int ans=INF;
-    for (int i=0; i<30; i++) {
-      ans = min(ans, r-l+1 - f(i, r) + f(i, l-1));
-    } 
+    int l, r;
+    aux = scanf("%d%d", &l, &r);
+    int ans = INF;
+    for (int i = 0; i < 30; i++) {
+      ans = min(ans, r - l + 1 - f(i, r) + f(i, l - 1));
+    }
     printf("%d\n", ans);
   }
 
   return 0;
 }
-

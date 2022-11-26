@@ -23,4 +23,3 @@ den=2**n
 getcontext().prec = 50
 
 print(Decimal(num) / Decimal(den))
-

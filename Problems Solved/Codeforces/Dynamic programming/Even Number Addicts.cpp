@@ -21,7 +21,7 @@ void _scan(vector<T> &v) {
 }
 void scan() {}
 template <typename T, typename... U>
-void scan(T &head, U &... tail) {
+void scan(T &head, U &...tail) {
   _scan(head);
   scan(tail...);
 }
@@ -32,7 +32,7 @@ void set_IO() {
 
 void _dbg(istream_iterator<string> it) {}
 template <typename T, typename... U>
-void _dbg(istream_iterator<string> it, T &head, U &... tail) {
+void _dbg(istream_iterator<string> it, T &head, U &...tail) {
   cout << *it << "=" << head << " ";
   _dbg(++it, tail...);
 }
@@ -60,40 +60,39 @@ typedef __uint128_t u128;
 
 int dp[101][101][2][2];
 
-int solve(int odd, int even, int flag, int acc){
-  if(odd + even == 0) return acc == 1;
-  int& ret = dp[odd][even][flag][acc];
-  if(ret != -1) return ret;
-  
-  if(flag==0){
-      ret = 2;
-      if(odd > 0) ret = min(ret, solve(odd-1, even, 1, (acc+1)%2));
-      if(even > 0) ret = min(ret, solve(odd, even-1, 1, acc));
-  }
-  else{
-      ret = -1;
-      if(odd > 0) ret = max(ret, solve(odd-1, even, 0, acc));
-      if(even > 0) ret = max(ret, solve(odd, even-1, 0, acc)); 
+int solve(int odd, int even, int flag, int acc) {
+  if (odd + even == 0) return acc == 1;
+  int &ret = dp[odd][even][flag][acc];
+  if (ret != -1) return ret;
+
+  if (flag == 0) {
+    ret = 2;
+    if (odd > 0) ret = min(ret, solve(odd - 1, even, 1, (acc + 1) % 2));
+    if (even > 0) ret = min(ret, solve(odd, even - 1, 1, acc));
+  } else {
+    ret = -1;
+    if (odd > 0) ret = max(ret, solve(odd - 1, even, 0, acc));
+    if (even > 0) ret = max(ret, solve(odd, even - 1, 0, acc));
   }
   return ret;
 }
 
-int main(){
+int main() {
   int tt;
   scan(tt);
-  while(tt--){
-      int n;
-      scan(n);
-      int a[n];
-      rep(i,0,n) scan(a[i]);
-      
-      int odd=0, even=0;
-      rep(i,0,n) (abs(a[i])%2==0) ? even++ : odd++;
-      
-      memset(dp,-1,sizeof(dp));
-      
-      printf("%s\n", (solve(odd, even, 0, 0) == 0) ? "Alice" : "Bob");
+  while (tt--) {
+    int n;
+    scan(n);
+    int a[n];
+    rep(i, 0, n) scan(a[i]);
+
+    int odd = 0, even = 0;
+    rep(i, 0, n)(abs(a[i]) % 2 == 0) ? even++ : odd++;
+
+    memset(dp, -1, sizeof(dp));
+
+    printf("%s\n", (solve(odd, even, 0, 0) == 0) ? "Alice" : "Bob");
   }
   return 0;
 }
-// "Si puedes imaginarlo puedes programarlo" Alejandro Taboada 
+// "Si puedes imaginarlo puedes programarlo" Alejandro Taboada

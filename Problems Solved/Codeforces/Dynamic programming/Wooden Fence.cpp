@@ -11,15 +11,12 @@ int n, l, w[100], h[100], aux;
 ll dp[3007][100][3];
 
 ll solve(int cnt, int j, int t) {
-  if (cnt > l)
-    return 0;
+  if (cnt > l) return 0;
 
   ll &ret = dp[cnt][j][t];
-  if (cnt == l)
-    return ret = 1;
+  if (cnt == l) return ret = 1;
 
-  if (ret != -1)
-    return ret;
+  if (ret != -1) return ret;
 
   ret = 0;
 
@@ -27,8 +24,7 @@ ll solve(int cnt, int j, int t) {
     FOR(i, 0, n) FOR(k, 0, 2) {
       ll s = (k == 0) ? solve(cnt + w[i], i, k) : solve(cnt + h[i], i, k);
       ret = (ret + s) % MOD;
-      if (w[i] == h[i])
-        break;
+      if (w[i] == h[i]) break;
     }
   }
 
@@ -36,15 +32,12 @@ ll solve(int cnt, int j, int t) {
     int width = (t == 0) ? h[j] : w[j];
 
     FOR(i, 0, n) FOR(k, 0, 2) {
-      if (i == j)
-        break;
+      if (i == j) break;
 
       int len = (k == 0) ? w[i] : h[i];
-      if (len == width)
-        ret = (ret + solve(cnt + len, i, k)) % MOD;
+      if (len == width) ret = (ret + solve(cnt + len, i, k)) % MOD;
 
-      if (w[i] == h[i])
-        break;
+      if (w[i] == h[i]) break;
     }
   }
 

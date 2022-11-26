@@ -1,5 +1,5 @@
-#include <iostream>
 #include <algorithm>
+#include <iostream>
 using namespace std;
 
 typedef long long ll;
@@ -7,30 +7,30 @@ typedef long long ll;
 const ll INF = 1e18;
 
 int main() {
-    int t; scanf("%d",&t);
+  int t;
+  scanf("%d", &t);
 
-    while(t--) {
-        int n; ll x;
-        scanf("%d%lld",&n,&x);
-        ll a[n];
-        for(int i=0; i<n; i++) scanf("%lld",a+i);
-        
-        sort(a, a+n, greater<ll>()); 
-        
-        ll curr = INF, cnt=0;
+  while (t--) {
+    int n;
+    ll x;
+    scanf("%d%lld", &n, &x);
+    ll a[n];
+    for (int i = 0; i < n; i++) scanf("%lld", a + i);
 
-        int ans=0;
+    sort(a, a + n, greater<ll>());
 
-        for(int i=0; i<n; i++) {
-            curr = min(curr, a[i]); 
-            cnt++;
-            if(cnt * curr >= x) 
-                ans++, curr = INF, cnt=0; 
-        }
+    ll curr = INF, cnt = 0;
 
-        printf("%d\n", ans);
+    int ans = 0;
+
+    for (int i = 0; i < n; i++) {
+      curr = min(curr, a[i]);
+      cnt++;
+      if (cnt * curr >= x) ans++, curr = INF, cnt = 0;
     }
 
-    return 0;
-}
+    printf("%d\n", ans);
+  }
 
+  return 0;
+}

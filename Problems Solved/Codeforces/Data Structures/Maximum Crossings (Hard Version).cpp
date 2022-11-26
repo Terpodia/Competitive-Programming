@@ -2,7 +2,7 @@
 #include <vector>
 using namespace std;
 
-#define LSOne(x) x&(-x)
+#define LSOne(x) x & (-x)
 
 typedef long long ll;
 
@@ -43,4 +43,3 @@ int main() {
   }
   return 0;
 }
-

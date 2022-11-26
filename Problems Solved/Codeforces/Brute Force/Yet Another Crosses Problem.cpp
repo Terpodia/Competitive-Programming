@@ -21,7 +21,7 @@ void _scan(vector<T> &v) {
 }
 void scan() {}
 template <typename T, typename... U>
-void scan(T &head, U &... tail) {
+void scan(T &head, U &...tail) {
   _scan(head);
   scan(tail...);
 }
@@ -32,7 +32,7 @@ void set_IO() {
 
 void _dbg(istream_iterator<string> it) {}
 template <typename T, typename... U>
-void _dbg(istream_iterator<string> it, T &head, U &... tail) {
+void _dbg(istream_iterator<string> it, T &head, U &...tail) {
   cout << *it << "=" << head << " ";
   _dbg(++it, tail...);
 }
@@ -62,8 +62,8 @@ int main() {
   while (tc--) {
     int n, m;
     scan(n, m);
-    char a[n][m];     
-    rep(i, 0, n) rep(j, 0, m) scan(a[i][j]); 
+    char a[n][m];
+    rep(i, 0, n) rep(j, 0, m) scan(a[i][j]);
     int cnt[m];
     memset(cnt, 0, sizeof(cnt));
     rep(i, 0, m) rep(j, 0, n) if (a[j][i] == '*') cnt[i]++;
@@ -71,8 +71,10 @@ int main() {
     rep(i, 0, n) {
       int s1 = 0, s2 = 0;
       rep(j, 0, m) {
-        if (a[i][j] == '*') s1++, s2 = max(s2, cnt[j]);
-        else s2 = max(s2, cnt[j]+1);
+        if (a[i][j] == '*')
+          s1++, s2 = max(s2, cnt[j]);
+        else
+          s2 = max(s2, cnt[j] + 1);
       }
       ans = min(ans, n - s1 + m - s2);
     }

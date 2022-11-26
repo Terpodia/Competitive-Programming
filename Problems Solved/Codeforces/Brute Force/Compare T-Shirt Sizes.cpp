@@ -21,7 +21,7 @@ void _scan(vector<T> &v) {
 }
 void scan() {}
 template <typename T, typename... U>
-void scan(T &head, U &... tail) {
+void scan(T &head, U &...tail) {
   _scan(head);
   scan(tail...);
 }
@@ -32,7 +32,7 @@ void set_IO() {
 
 void _dbg(istream_iterator<string> it) {}
 template <typename T, typename... U>
-void _dbg(istream_iterator<string> it, T &head, U &... tail) {
+void _dbg(istream_iterator<string> it, T &head, U &...tail) {
   cout << *it << "=" << head << " ";
   _dbg(++it, tail...);
 }
@@ -61,40 +61,53 @@ typedef __uint128_t u128;
 int main() {
   set_IO();
   int tt;
-  cin>>tt;
-  while(tt--){
-    string a,b;
-    cin>>a>>b;
-    int cnt1=0, cnt2=0;
-    int t1=-1, t2=-1;
+  cin >> tt;
+  while (tt--) {
+    string a, b;
+    cin >> a >> b;
+    int cnt1 = 0, cnt2 = 0;
+    int t1 = -1, t2 = -1;
 
-    for(char c : a){
-      if(c=='X') cnt1++;
-      else if(c=='S') t1=0;
-      else if(c=='M') t1=1;
-      else t1 = 2;
+    for (char c : a) {
+      if (c == 'X')
+        cnt1++;
+      else if (c == 'S')
+        t1 = 0;
+      else if (c == 'M')
+        t1 = 1;
+      else
+        t1 = 2;
     }
-    for(char c : b){
-      if(c=='X') cnt2++;
-      else if(c=='S') t2=0;
-      else if(c=='M') t2=1;
-      else t2 = 2;
+    for (char c : b) {
+      if (c == 'X')
+        cnt2++;
+      else if (c == 'S')
+        t2 = 0;
+      else if (c == 'M')
+        t2 = 1;
+      else
+        t2 = 2;
     }
 
-    if(t1 != t2){
-      if(t1 < t2) cout << "<\n";
-      else cout << ">\n";
-    }
-    else{
-      if(cnt1 == cnt2) cout << "=\n";
-      else{
-        if(t1 == 0){
-          if(cnt1 > cnt2) cout << "<\n";
-          else cout << ">\n";
-        }
-        else{
-          if(cnt1 > cnt2) cout << ">\n";
-          else cout << "<\n";
+    if (t1 != t2) {
+      if (t1 < t2)
+        cout << "<\n";
+      else
+        cout << ">\n";
+    } else {
+      if (cnt1 == cnt2)
+        cout << "=\n";
+      else {
+        if (t1 == 0) {
+          if (cnt1 > cnt2)
+            cout << "<\n";
+          else
+            cout << ">\n";
+        } else {
+          if (cnt1 > cnt2)
+            cout << ">\n";
+          else
+            cout << "<\n";
         }
       }
     }
