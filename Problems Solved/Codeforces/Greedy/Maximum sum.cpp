@@ -25,6 +25,8 @@ mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 typedef long long ll;
 typedef long double ld;
 
+const ll MOD = 1e9 + 7;
+
 int main() {
   // freopen("input.txt","r",stdin);
   // freopen("output.txt","w",stdout);
@@ -35,13 +37,25 @@ int main() {
   while (tt--) {
     int n, k;
     cin >> n >> k;
-    ll a[n], pref[n + 1], ans = 0;
+    ll a[n];
     fore(i, 0, n) cin >> a[i];
-    sort(a, a + n);
-
+    ll pref[n + 1];
     pref[0] = 0;
     fore(i, 1, n + 1) pref[i] = pref[i - 1] + a[i - 1];
-    fore(w, 0, k + 1) { ans = max(ans, pref[n - k + w] - pref[w * 2]); }
+    ll sum = 0, lo = 0;
+    fore(i, 1, n + 1) {
+      sum = max(pref[i] - lo, sum);
+      lo = min(lo, pref[i]);
+    }
+    ll ans = pref[n];
+    ans = ((ans % MOD) + MOD) % MOD;
+    if (sum > 0) {
+      sum %= MOD;
+      fore(i, 0, k) {
+        ans = (ans + sum) % MOD;
+        sum = (sum * 2) % MOD;
+      }
+    }
     cout << ans << "\n";
   }
   return 0;
