@@ -65,15 +65,36 @@ int main() {
     dfor(i, len(m1[w]) - 1) { ans[v[i]] = {m1[w][i].fst, m1[w][i].snd}; }
   }
   bool can = true;
-  forn(i, n - 1) {
-    if (ans[i].fst >= ans[i + 1].fst && ans[i].snd >= ans[i + 1].snd)
-      can = false;
+  map<pair<int, int>, int> val, hi;
+  forn(i, n) val[ans[i]] = hi[ans[i]] = i;
+
+  int x = 0, y = 0;
+  while (hi.find({x, y}) != hi.end()) {
+    x = 1;
+    while (hi.find({x, y}) != hi.end()) {
+      hi[make_pair(x, y)] = max(hi[make_pair(x, y)], hi[make_pair(x - 1, y)]);
+      x++;
+    }
+    x = 0, y++;
   }
-  if (!can) {
+  x = 0, y = 0;
+  while (hi.find({x, y}) != hi.end()) {
+    y = 1;
+    while (hi.find({x, y}) != hi.end()) {
+      hi[make_pair(x, y)] = max(hi[make_pair(x, y)], hi[make_pair(x, y - 1)]);
+      y++;
+    }
+    x++, y = 0;
+  }
+
+  for (auto &[a, b] : hi) {
+    if (b > val[a]) can = false;
+  }
+  if (!can)
     cout << "NO\n";
-    return 0;
+  else {
+    cout << "YES\n";
+    forn(i, n) cout << ans[i].fst $ ans[i].snd << "\n";
   }
-  cout << "YES\n";
-  for (auto [x, y] : ans) cout << x $ y << "\n";
   return 0;
 }
