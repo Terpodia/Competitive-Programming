@@ -36,37 +36,27 @@ typedef long long ll;
 
 const int INF = 1e9;
 
-int n, k;
-
-ll calc(vector<ll> &x) {
-  if (!len(x)) return 0;
-
-  sort(all(x));
-  int r = len(x) % k;
-  ll ret = 0;
-
-  if (r > 0) ret += x[r - 1] * 2LL;
-
-  for (int i = r + k - 1; i < len(x); i += k) {
-    ret += 2LL * x[i];
-  }
-  ret -= x.back();
-  return ret;
-}
-
 void solve() {
-  cin >> n >> k;
-  vector<ll> v1, v2;
-  forn(i, n) {
-    int x;
-    cin >> x;
-    if (x >= 0)
-      v1.push_back(x);
-    else
-      v2.push_back(-x);
+  int n;
+  cin >> n;
+  int a[n];
+  forn(i, n) cin >> a[i];
+
+  ll ans = 0;
+  fore(i, 1, n) { ans += ((ll)i * (ll)(i + 1)) / 2LL; }
+  forn(i, n - 1) {
+    int pref[n + 1];
+    pref[i + 1] = a[i + 1];
+    fore(j, i + 2, n) pref[j] = min(pref[j - 1], a[j]);
+    int r = n - 1;
+    int cur = a[i];
+
+    dfor(j, i + 1) {
+      cur = max(cur, a[j]);
+      while (cur > pref[r] && r > i) r--;
+      ans -= (ll)r - (ll)i;
+    }
   }
-  ll ans = calc(v1) + calc(v2);
-  if (len(v1) > 0 && len(v2) > 0) ans += min(v1.back(), v2.back());
   cout << ans << "\n";
 }
 

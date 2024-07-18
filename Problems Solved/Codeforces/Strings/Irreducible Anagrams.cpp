@@ -36,47 +36,46 @@ typedef long long ll;
 
 const int INF = 1e9;
 
-int n, k;
-
-ll calc(vector<ll> &x) {
-  if (!len(x)) return 0;
-
-  sort(all(x));
-  int r = len(x) % k;
-  ll ret = 0;
-
-  if (r > 0) ret += x[r - 1] * 2LL;
-
-  for (int i = r + k - 1; i < len(x); i += k) {
-    ret += 2LL * x[i];
-  }
-  ret -= x.back();
-  return ret;
-}
-
-void solve() {
-  cin >> n >> k;
-  vector<ll> v1, v2;
-  forn(i, n) {
-    int x;
-    cin >> x;
-    if (x >= 0)
-      v1.push_back(x);
-    else
-      v2.push_back(-x);
-  }
-  ll ans = calc(v1) + calc(v2);
-  if (len(v1) > 0 && len(v2) > 0) ans += min(v1.back(), v2.back());
-  cout << ans << "\n";
-}
-
 int main() {
   ios_base::sync_with_stdio(0);
   cin.tie(0);
-  int tt;
-  cin >> tt;
-  while (tt--) {
-    solve();
+  string s;
+  cin >> s;
+  int n = len(s);
+
+  int pref[26][n + 1];
+  forn(i, 26) pref[i][0] = 0;
+
+  forn(c, 26) {
+    fore(i, 1, n + 1) {
+      pref[c][i] = pref[c][i - 1];
+      if (c + 'a' == s[i - 1]) pref[c][i]++;
+    }
+  }
+
+  int q;
+  cin >> q;
+  while (q--) {
+    int l, r;
+    cin >> l >> r;
+    l--, r--;
+
+    if (r - l == 0) {
+      cout << "Yes\n";
+      continue;
+    }
+    if (s[l] != s[r]) {
+      cout << "Yes\n";
+      continue;
+    }
+    int cnt = 0;
+    forn(c, 26) {
+      if (pref[c][r + 1] - pref[c][l] > 0) cnt++;
+    }
+    if (cnt > 2)
+      cout << "Yes\n";
+    else
+      cout << "No\n";
   }
   return 0;
 }

@@ -36,47 +36,49 @@ typedef long long ll;
 
 const int INF = 1e9;
 
-int n, k;
+const int MAXN = 4e5 + 100;
 
-ll calc(vector<ll> &x) {
-  if (!len(x)) return 0;
+int n;
+string s[21];
+int sum[21];
+bool f[21][MAXN];
+int cnt[21][MAXN];
 
-  sort(all(x));
-  int r = len(x) % k;
-  ll ret = 0;
+int dp[1 << 20][2];
 
-  if (r > 0) ret += x[r - 1] * 2LL;
+int solve(int msk, int flag) {
+  int &ret = dp[msk][flag];
+  if (ret != -1) return ret;
+  if (flag == 1) return ret = 0;
+  ret = 0;
 
-  for (int i = r + k - 1; i < len(x); i += k) {
-    ret += 2LL * x[i];
+  int cur = 0;
+  forn(i, n) if (msk & (1 << i)) { cur += sum[i]; }
+  forn(i, n) if (!(msk & (1 << i))) {
+    int nmsk = (msk | (1 << i));
+    int nflag = 1 - (int)f[i][cur];
+    ret = max(ret, cnt[i][cur] + solve(nmsk, nflag));
   }
-  ret -= x.back();
   return ret;
-}
-
-void solve() {
-  cin >> n >> k;
-  vector<ll> v1, v2;
-  forn(i, n) {
-    int x;
-    cin >> x;
-    if (x >= 0)
-      v1.push_back(x);
-    else
-      v2.push_back(-x);
-  }
-  ll ans = calc(v1) + calc(v2);
-  if (len(v1) > 0 && len(v2) > 0) ans += min(v1.back(), v2.back());
-  cout << ans << "\n";
 }
 
 int main() {
   ios_base::sync_with_stdio(0);
   cin.tie(0);
-  int tt;
-  cin >> tt;
-  while (tt--) {
-    solve();
+  cin >> n;
+  forn(i, n) cin >> s[i];
+  forn(i, n) {
+    for (char c : s[i]) sum[i] += (c == '(') ? 1 : -1;
+
+    int cur = 0, hi = 0;
+    for (char c : s[i]) {
+      cur += (c == '(') ? 1 : -1;
+      if (cur <= 0 && hi <= -cur) cnt[i][-cur]++;
+      hi = max(hi, -cur);
+    }
+    fore(j, hi, MAXN) f[i][j] = true;
   }
+  memset(dp, -1, sizeof(dp));
+  cout << solve(0, 0) << "\n";
   return 0;
 }

@@ -36,47 +36,48 @@ typedef long long ll;
 
 const int INF = 1e9;
 
-int n, k;
+const ll MOD = 1e9 + 7;
 
-ll calc(vector<ll> &x) {
-  if (!len(x)) return 0;
+vector<ll> d;
 
-  sort(all(x));
-  int r = len(x) % k;
-  ll ret = 0;
-
-  if (r > 0) ret += x[r - 1] * 2LL;
-
-  for (int i = r + k - 1; i < len(x); i += k) {
-    ret += 2LL * x[i];
+ll binpow(ll a, ll b) {
+  ll ret = 1;
+  while (b) {
+    if (b & 1) ret = (ret * a) % MOD;
+    a = (a * a) % MOD;
+    b >>= 1;
   }
-  ret -= x.back();
   return ret;
 }
 
-void solve() {
-  cin >> n >> k;
-  vector<ll> v1, v2;
-  forn(i, n) {
-    int x;
-    cin >> x;
-    if (x >= 0)
-      v1.push_back(x);
-    else
-      v2.push_back(-x);
+unordered_map<ll, ll> dp;
+
+ll solve(ll y) {
+  if (dp.find(y) != dp.end()) return dp[y];
+  ll res = binpow(2, y - 1);
+  forn(i, len(d)) if (y % d[i] == 0) {
+    res = (res - solve(y / d[i])) % MOD;
+    res += MOD, res %= MOD;
   }
-  ll ans = calc(v1) + calc(v2);
-  if (len(v1) > 0 && len(v2) > 0) ans += min(v1.back(), v2.back());
-  cout << ans << "\n";
+  return dp[y] = res;
 }
 
 int main() {
   ios_base::sync_with_stdio(0);
   cin.tie(0);
-  int tt;
-  cin >> tt;
-  while (tt--) {
-    solve();
+  ll x, y;
+  cin >> x >> y;
+  if (y % x != 0) {
+    cout << "0\n";
+    return 0;
   }
+  y /= x;
+  if (y != 1) d.pb(y);
+  for (ll i = 2; i * i <= y; i++)
+    if (y % i == 0) {
+      d.pb(i);
+      if (y / i != i) d.pb(y / i);
+    }
+  cout << solve(y) << "\n";
   return 0;
 }

@@ -34,40 +34,29 @@ ostream &operator<<(ostream &os, const vector<T> &v) {
 
 typedef long long ll;
 
-const int INF = 1e9;
+const ll INF = 1e18 + 10LL;
 
-int n, k;
+const int MAXN = 3e5 + 10;
 
-ll calc(vector<ll> &x) {
-  if (!len(x)) return 0;
+int n;
+vector<ll> a;
+vector<int> g[MAXN];
 
-  sort(all(x));
-  int r = len(x) % k;
-  ll ret = 0;
+ll dp[MAXN][21];
 
-  if (r > 0) ret += x[r - 1] * 2LL;
+void dfs(int u, int p = -1) {
+  fore(i, 1, 21) dp[u][i] = a[u] * (ll)i;
+  for (int v : g[u])
+    if (v != p) {
+      dfs(v, u);
+      ll pref[22], suff[22];
 
-  for (int i = r + k - 1; i < len(x); i += k) {
-    ret += 2LL * x[i];
-  }
-  ret -= x.back();
-  return ret;
-}
+      pref[0] = INF, suff[21] = INF;
+      fore(i, 1, 21) pref[i] = min(pref[i - 1], dp[v][i]);
+      dfor(i, 21) suff[i] = min(suff[i + 1], dp[v][i]);
 
-void solve() {
-  cin >> n >> k;
-  vector<ll> v1, v2;
-  forn(i, n) {
-    int x;
-    cin >> x;
-    if (x >= 0)
-      v1.push_back(x);
-    else
-      v2.push_back(-x);
-  }
-  ll ans = calc(v1) + calc(v2);
-  if (len(v1) > 0 && len(v2) > 0) ans += min(v1.back(), v2.back());
-  cout << ans << "\n";
+      fore(i, 1, 21) { dp[u][i] += min(pref[i - 1], suff[i + 1]); }
+    }
 }
 
 int main() {
@@ -76,7 +65,24 @@ int main() {
   int tt;
   cin >> tt;
   while (tt--) {
-    solve();
+    cin >> n;
+    a = vector<ll>(n);
+    forn(i, n) cin >> a[i];
+    forn(i, n - 1) {
+      int u, v;
+      cin >> u >> v;
+      u--, v--;
+      g[u].pb(v);
+      g[v].pb(u);
+    }
+    forn(i, n + 1) forn(j, 21) dp[i][j] = -1;
+
+    dfs(0);
+    ll res = INF;
+    fore(i, 1, 21) res = min(res, dp[0][i]);
+    cout << res << "\n";
+
+    forn(i, n) g[i].clear();
   }
   return 0;
 }

@@ -34,40 +34,37 @@ ostream &operator<<(ostream &os, const vector<T> &v) {
 
 typedef long long ll;
 
-const int INF = 1e9;
-
-int n, k;
-
-ll calc(vector<ll> &x) {
-  if (!len(x)) return 0;
-
-  sort(all(x));
-  int r = len(x) % k;
-  ll ret = 0;
-
-  if (r > 0) ret += x[r - 1] * 2LL;
-
-  for (int i = r + k - 1; i < len(x); i += k) {
-    ret += 2LL * x[i];
-  }
-  ret -= x.back();
-  return ret;
-}
-
 void solve() {
-  cin >> n >> k;
-  vector<ll> v1, v2;
-  forn(i, n) {
-    int x;
-    cin >> x;
-    if (x >= 0)
-      v1.push_back(x);
-    else
-      v2.push_back(-x);
+  int n, m;
+  cin >> n >> m;
+  int a[n][m], b[n][m];
+  forn(i, n) forn(j, m) {
+    char c;
+    cin >> c;
+    a[i][j] = c - '0';
   }
-  ll ans = calc(v1) + calc(v2);
-  if (len(v1) > 0 && len(v2) > 0) ans += min(v1.back(), v2.back());
-  cout << ans << "\n";
+  forn(i, n) forn(j, m) {
+    char c;
+    cin >> c;
+    b[i][j] = c - '0';
+  }
+
+  forn(i, n - 1) forn(j, m - 1) {
+    int r = i + 1, c = j + 1;
+    int x = ((b[i][j] - a[i][j]) % 3 + 3) % 3;
+    a[i][j] = (a[i][j] + x) % 3;
+    a[r][c] = (a[r][c] + x) % 3;
+    a[i][c] = (a[i][c] + 2 * x) % 3;
+    a[r][j] = (a[r][j] + 2 * x) % 3;
+  }
+
+  forn(i, n) forn(j, m) {
+    if (a[i][j] != b[i][j]) {
+      cout << "NO\n";
+      return;
+    }
+  }
+  cout << "YES\n";
 }
 
 int main() {

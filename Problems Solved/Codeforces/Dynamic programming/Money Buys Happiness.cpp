@@ -34,40 +34,37 @@ ostream &operator<<(ostream &os, const vector<T> &v) {
 
 typedef long long ll;
 
-const int INF = 1e9;
-
-int n, k;
-
-ll calc(vector<ll> &x) {
-  if (!len(x)) return 0;
-
-  sort(all(x));
-  int r = len(x) % k;
-  ll ret = 0;
-
-  if (r > 0) ret += x[r - 1] * 2LL;
-
-  for (int i = r + k - 1; i < len(x); i += k) {
-    ret += 2LL * x[i];
-  }
-  ret -= x.back();
-  return ret;
-}
+const ll INF = 1e18;
 
 void solve() {
-  cin >> n >> k;
-  vector<ll> v1, v2;
-  forn(i, n) {
-    int x;
-    cin >> x;
-    if (x >= 0)
-      v1.push_back(x);
-    else
-      v2.push_back(-x);
+  int m;
+  ll x;
+  cin >> m >> x;
+  ll c[m];
+  int h[m], maxh = 0;
+  forn(i, m) {
+    cin >> c[i] >> h[i];
+    maxh += h[i];
   }
-  ll ans = calc(v1) + calc(v2);
-  if (len(v1) > 0 && len(v2) > 0) ans += min(v1.back(), v2.back());
-  cout << ans << "\n";
+  ll dp[m + 1][maxh + 1];
+  forn(i, m + 1) forn(j, maxh + 1) dp[i][j] = INF;
+  dp[0][0] = 0;
+
+  fore(i, 1, m + 1) {
+    fore(j, 0, maxh + 1) {
+      dp[i][j] = dp[i - 1][j];
+      if (j >= h[i - 1] &&
+          dp[i - 1][j - h[i - 1]] + c[i - 1] <= x * (ll)(i - 1))
+        dp[i][j] = min(dp[i][j], dp[i - 1][j - h[i - 1]] + c[i - 1]);
+    }
+  }
+  dfor(i, maxh + 1) {
+    if (dp[m][i] <= x * (ll)m) {
+      cout << i << "\n";
+      return;
+    }
+  }
+  cout << "0\n";
 }
 
 int main() {

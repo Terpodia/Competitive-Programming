@@ -37,46 +37,40 @@ typedef long long ll;
 const int INF = 1e9;
 
 int n, k;
+ll a[401], pref[401], dp[401][401];
 
-ll calc(vector<ll> &x) {
-  if (!len(x)) return 0;
+ll solve(int l, int r) {
+  ll &ret = dp[l][r];
+  if (ret != -1) return ret;
+  ret = 0;
 
-  sort(all(x));
-  int r = len(x) % k;
-  ll ret = 0;
+  int m = k - (l + n - 1 - r) / 2;
+  if (m == 0) return ret;
 
-  if (r > 0) ret += x[r - 1] * 2LL;
-
-  for (int i = r + k - 1; i < len(x); i += k) {
-    ret += 2LL * x[i];
+  fore(i, l, r) {
+    if (m <= r - i - 1 && m <= i - l) {
+      ret = max(ret, (pref[i + 1 + m] - pref[i + 1]) -
+                         (pref[i + 1] - pref[i + 1 - m]));
+    } else if (r - i - 1 <= i - l) {
+      ret = max(ret, (pref[r + 1] - pref[i + 1]) -
+                         (pref[i + 1] - pref[i - r + i + 1]) +
+                         solve(l, i - r + i));
+    } else {
+      ret = max(ret, (pref[i + 1 + i - l + 1] - pref[i + 1]) -
+                         (pref[i + 1] - pref[l]) + solve(i + 1 + i - l + 1, r));
+    }
   }
-  ret -= x.back();
   return ret;
-}
-
-void solve() {
-  cin >> n >> k;
-  vector<ll> v1, v2;
-  forn(i, n) {
-    int x;
-    cin >> x;
-    if (x >= 0)
-      v1.push_back(x);
-    else
-      v2.push_back(-x);
-  }
-  ll ans = calc(v1) + calc(v2);
-  if (len(v1) > 0 && len(v2) > 0) ans += min(v1.back(), v2.back());
-  cout << ans << "\n";
 }
 
 int main() {
   ios_base::sync_with_stdio(0);
   cin.tie(0);
-  int tt;
-  cin >> tt;
-  while (tt--) {
-    solve();
-  }
+  cin >> n >> k;
+  forn(i, n) cin >> a[i];
+  sort(a, a + n);
+  fore(i, 1, n + 1) pref[i] = pref[i - 1] + a[i - 1];
+  memset(dp, -1, sizeof(dp));
+  cout << solve(0, n - 1) << "\n";
   return 0;
 }

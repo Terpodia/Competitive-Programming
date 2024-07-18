@@ -34,40 +34,36 @@ ostream &operator<<(ostream &os, const vector<T> &v) {
 
 typedef long long ll;
 
-const int INF = 1e9;
+const int MAXN = 5050;
 
-int n, k;
+vector<int> b;
+map<int, int> m;
+int dp[MAXN][MAXN];
 
-ll calc(vector<ll> &x) {
-  if (!len(x)) return 0;
+int f(int i, int j) {
+  if (i >= len(b)) return 0;
+  int &ret = dp[i][j];
+  if (ret != -1) return ret;
 
-  sort(all(x));
-  int r = len(x) % k;
-  ll ret = 0;
-
-  if (r > 0) ret += x[r - 1] * 2LL;
-
-  for (int i = r + k - 1; i < len(x); i += k) {
-    ret += 2LL * x[i];
-  }
-  ret -= x.back();
+  ret = 1 + f(i + 1, j + 1);
+  if (m[b[i]] <= j) ret = min(ret, f(i + 1, j - m[b[i]]));
   return ret;
 }
 
 void solve() {
-  cin >> n >> k;
-  vector<ll> v1, v2;
-  forn(i, n) {
-    int x;
-    cin >> x;
-    if (x >= 0)
-      v1.push_back(x);
-    else
-      v2.push_back(-x);
-  }
-  ll ans = calc(v1) + calc(v2);
-  if (len(v1) > 0 && len(v2) > 0) ans += min(v1.back(), v2.back());
-  cout << ans << "\n";
+  int n;
+  cin >> n;
+  int a[n];
+  forn(i, n) cin >> a[i];
+
+  b.clear();
+  m.clear();
+  forn(i, n + 10) forn(j, n + 10) dp[i][j] = -1;
+
+  forn(i, n) m[a[i]]++;
+  for (auto &[x, y] : m) b.push_back(x);
+
+  cout << f(0, 0) << "\n";
 }
 
 int main() {
